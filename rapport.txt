@@ -11,6 +11,7 @@
   - travail par 3 groupes de 4 autour de l'élaboration du cahier des charges pour Noeuds, Arcs et Objets (idée d'implémentation et fonctions utiles supportées)
   - mise en commun des cahiers des charges afin de rédiger le cahier des charges global
       ~ Noeud : - avoir un id
+                - avoir un descripteur
                 - être connecté à un nombre d’arc
                 - se connecter/déconnecter à un noeud
                 - stocker un nombre fini d’objet
