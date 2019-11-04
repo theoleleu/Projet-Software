@@ -1,9 +1,7 @@
-                                          /***********************\
-                                          *   Rapport de projet   *
-                                          \_______________________/
-╔═══════════╗
-║           ║
-╚═══════════╝
+                                          ╔═══════════════════════╗
+                                          ║   Rapport de projet   ║
+                                          ╚═══════════════════════╝
+
 04/11/19 :
   - brainstorming autour du concept de réseau afin d'en retirer les concepts généraux
   - élaboration du réseau à implémenter / cahier des charges abstrait :
