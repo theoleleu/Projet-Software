@@ -1,4 +1,14 @@
       Rapport du Projet
 
 04/11/19 :
-  Choix du réseau : Hôpital 
+
+  - brainstorming autour du concept de réseau
+  
+  - élaboration du réseau à implémenter / cahier des charges :
+      ~ Node : points du réseau, stock des ...
+            (capacité à recevoir ..., Blacklist, taille totale, les autres nodes auxquelles elle refuse de se connecter)
+      ~ lien : communication entre les Nodes, relie et fait transiter des ...
+      ~ point : pointeur qui parcourt le réseau
+      Implémentation des fonctions :
+      ~ Ajout/Supp : ajouter ou supprimer des Nodes, liens, points
+             
