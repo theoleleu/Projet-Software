@@ -1,14 +1,14 @@
       Rapport du Projet
 
 04/11/19 :
-
   - brainstorming autour du concept de réseau
-  
   - élaboration du réseau à implémenter / cahier des charges :
-      ~ Node : points du réseau, stock des ...
-            (capacité à recevoir ..., Blacklist, taille totale, les autres nodes auxquelles elle refuse de se connecter)
-      ~ lien : communication entre les Nodes, relie et fait transiter des ...
-      ~ point : pointeur qui parcourt le réseau
+      ~ Noeud : points du réseau, stock des Objets
+            (capacité à recevoir Objets, Blacklist, taille totale, les autres Noeuds auxquelles elle refuse de se connecter)
+      ~ Arc : communication entre les Noeuds, relie et fait transiter des Objets
+      ~ Objet : pointeur qui parcourt le réseau
       Implémentation des fonctions :
-      ~ Ajout/Supp : ajouter ou supprimer des Nodes, liens, points
+      ~ Ajout/Supp : ajouter ou supprimer des Noeuds, Arcs, Objets
+  - travail par 3 groupes de 4 autour de l'élaboration du cahier des charges pour Noeuds, Arcs et Objets
+  - mise en commun des cahiers des charges afin de rédiger le cahier des charges global
              
