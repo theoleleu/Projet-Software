@@ -20,10 +20,11 @@
               - avoir un sens
               - avoir une taille
               - avoir une capacité
-              - avoir une vitesse
+              - imposer une vitesse
               - gérer un droit de parcours
       ~ Objet : - avoir un id
                 - avoir une position (Noeud ou Lien)
+                - décider un parcours
                 - connaitre un trajet
                 - gérer un droit de parcours
                 - avoir une vitesse
