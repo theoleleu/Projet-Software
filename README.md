@@ -1,4 +1,3 @@
 # Projet-Software
 
-Chef de Projet : Paul Artigouha \n
-Rédacteur : Antoine Quillivic \n
+Chef de Projet : Paul Artigouha ; Rédacteur : Antoine Quillivic
