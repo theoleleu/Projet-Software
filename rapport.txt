@@ -1,6 +1,6 @@
-                                          ╔═══════════════════════╗
-                                          ║   Rapport de projet   ║
-                                          ╚═══════════════════════╝
+                                          ╔════════════════════════╗
+                                          ║    Rapport de projet   ║
+                                          ╚════════════════════════╝
 
 04/11/19 :
   - brainstorming autour du concept de réseau afin d'en retirer les concepts généraux
@@ -32,5 +32,10 @@
                 - gérer un droit de parcours
                 - avoir une vitesse
                 - gérer une interdépendance/relation entre objet
+  - recentrage du projet autour d'un cahier des charges plus simple, réflexion autour du sujet du projet :
+      Interface user :
+        - user_friendly
+        - visualiser
+        - interragir : réseau (créer, détruire, modifier)
 
              
