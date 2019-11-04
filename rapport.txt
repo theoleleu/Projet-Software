@@ -32,10 +32,10 @@
                 - gérer un droit de parcours
                 - avoir une vitesse
                 - gérer une interdépendance/relation entre objet
-  - recentrage du projet autour d'un cahier des charges plus simple, réflexion autour du sujet du projet :
-      Interface user :
-        - user_friendly
-        - visualiser
-        - interragir : réseau (créer, détruire, modifier)
+  - recentrage du projet autour d'un cahier des charges plus simple, réflexion autour du sujet du projet
+  - Bilan : Interface user :
+              - user_friendly
+              - visualiser
+              - interragir : réseau (créer, détruire, modifier)
 
              
