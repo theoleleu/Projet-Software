@@ -1,14 +1,32 @@
       Rapport du Projet
 
 04/11/19 :
-  - brainstorming autour du concept de réseau
-  - élaboration du réseau à implémenter / cahier des charges :
+  - brainstorming autour du concept de réseau afin d'en retirer les concepts généraux
+  - élaboration du réseau à implémenter / cahier des charges abstrait :
       ~ Noeud : points du réseau, stock des Objets
-            (capacité à recevoir Objets, Blacklist, taille totale, les autres Noeuds auxquelles elle refuse de se connecter)
       ~ Arc : communication entre les Noeuds, relie et fait transiter des Objets
       ~ Objet : pointeur qui parcourt le réseau
-      Implémentation des fonctions :
-      ~ Ajout/Supp : ajouter ou supprimer des Noeuds, Arcs, Objets
-  - travail par 3 groupes de 4 autour de l'élaboration du cahier des charges pour Noeuds, Arcs et Objets
+  - travail par 3 groupes de 4 autour de l'élaboration du cahier des charges pour Noeuds, Arcs et Objets (idée d'implémentation et fonctions utiles supportées)
   - mise en commun des cahiers des charges afin de rédiger le cahier des charges global
+      ~ Noeud : - avoir un id
+                - être connecté à un nombre d’arc
+                - se connecter/déconnecter à un noeud
+                - stocker un nombre fini d’objet
+                - générer/supprimer des objets
+                - envoyer/recevoir un objet
+                - gérer la priorité envoi/réception
+      ~ Arc : - avoir un id
+              - connexion à un départ/arrivée
+              - avoir un sens
+              - avoir une taille
+              - avoir une capacité
+              - avoir une vitesse
+              - gérer un droit de parcours
+      ~ Objet : - avoir un id
+                - avoir une position (Noeud ou Lien)
+                - connaitre un trajet
+                - gérer un droit de parcours
+                - avoir une vitesse
+                - gérer une interdépendance/relation entre objet
+
              
