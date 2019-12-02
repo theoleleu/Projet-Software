@@ -1,6 +1,7 @@
 package sample;
 
 public class Arc {
+    
     public String id;
     private String name;
     private Node start;
