@@ -13,6 +13,7 @@ public class Arc {
     private boolean speedIsLimited;
 
     private int countPoint;
+    
     private static int arcCounter;
 
     public Arc(){
