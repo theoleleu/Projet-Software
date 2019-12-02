@@ -6,7 +6,7 @@ public class Node {
 	private String descripteur;
     List<Arc> arc = new ArrayList<>();
     private int nbArc;
-    List<Object> object = new ArrayList<>();
+    List<Point> object = new ArrayList<>();
     List<Node> children = new ArrayList<>();//all the nodes come to my node 
     List<Node> parents = new ArrayList<>();// all the nodes that my node goes to 
 
@@ -37,24 +37,20 @@ public class Node {
     public void removeNodeParents(Node n) {
         parents.remove(n);
     }
-    public void addObject(Object n) {
+    public void addObject(Point n) {
         object.add(n);
     }
     
-    public void supprimerObject(Object n) {
+    public void supprimerObject(Point n) {
         object.remove(n);
     }
-    
-    public void removeObject(Node n) {
-        object.remove(n);
-    }
-    
-    public void envoyerObject(Node n,Object o) {
+
+    public void envoyerObject(Node n,Point o) {
         object.remove(o);
         n.addObject(o);
     }
     
-    public void recevoirObject(Node n,Object o) {
+    public void recevoirObject(Node n,Point o) {
         this.addObject(o);
     	n.supprimerObject(o);
     }
