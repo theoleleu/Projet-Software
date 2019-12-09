@@ -9,7 +9,6 @@ public class Node {
     List<Point> object = new ArrayList<>();
     List<Node> children = new ArrayList<>();//all the nodes come to my node 
     List<Node> parents = new ArrayList<>();// all the nodes that my node goes to 
-
     public Node(int Noeudid) {
         this.id = Noeudid;
     }
