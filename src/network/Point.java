@@ -1,22 +1,25 @@
 package network;
 
 import java.lang.String;
+import java.util.NoSuchElementException;
 
 public class Point {
     private String id;
     private String name;
     private String donnees;
     private String[] parcours;
-    private float vitesse; //TODO
+    private float priority; 
 
     private int position;
     private boolean onNode;
 
-    public Point(String id, String name, String donnees, String[] parcours, int position, boolean onNode) {
+    public Point(String id, String name, String donnees, String[] parcours, float priority, int position, boolean onNode) {
         this.id = id;
         this.name = name;
         this.donnees = donnees;
         this.parcours = parcours;
+        this.priority = priority;
+        
         this.position = position;
         if (this.parcours[position].charAt(0) == 1) {
             this.onNode = false;
@@ -46,16 +49,20 @@ public class Point {
         return this.donnees;
     }
 
-    public float getVitesse() {
-        return this.vitesse;
+    public float getPriority() {
+        return this.priority;
     }
 
-    public void setVitesse(int v) {
-        this.vitesse = v;
+    public void setPriority(float p) {
+        this.priority = p;
     }
 
-    public String getPosition() {
+    public int getPosition() {
         return this.position;
+    }
+
+    public void setPosition(int p) {
+        this.position = p;
     }
 
     public String getIdPosition() {
@@ -66,7 +73,7 @@ public class Point {
         return this.onNode;
     }
 
-    public int stepParcours() {
+    public int step() {
         if (onNode && this.parcours[position+1].charAt(0) == 1) {
             this.onNode = false;
             position += 1;
