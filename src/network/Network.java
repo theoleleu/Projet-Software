@@ -47,15 +47,15 @@ public class Network {
         this.arcs.add(arc);
     }
 
-    public delArc(ARC arc){
+    public void delArc(Arc arc){
         this.arcs.remove(arc);
     }
 
-    public addPoint(Point point){
+    public void addPoint(Point point){
         this.points.add(point);
     }
 
-    public delPoint(Point point){
+    public void delPoint(Point point){
         this.points.remove(point);
     }
 
