@@ -52,9 +52,9 @@ class VectorArc
     Line line;
     String nom;
     Integer capacite;
-    String depart;
-    String arrivee;
-    public VectorArc(Line line,String nom,Integer capacite,String depart,String arrivee){
+    VectorNode depart;
+    VectorNode arrivee;
+    public VectorArc(Line line,String nom,Integer capacite,VectorNode depart,VectorNode arrivee){
         this.line = line;
         this.nom = nom;
         this.depart = depart;
@@ -111,7 +111,7 @@ public class MenuController<E> {
         this.root = root;
     }
 
-    public void createNode(Double x,Double y,Double capacite,String nom) {//Permet d'afficher un Noeud
+    private void createNode(Double x, Double y, Double capacite, String nom) {//Permet d'afficher un Noeud
         Circle cercle = new Circle();
         cercle.setCenterX(x+183);//réglage de la position, de la taille et de la couleur du cercle
         cercle.setCenterY(y);
@@ -135,16 +135,16 @@ public class MenuController<E> {
         VectorNode element = new VectorNode(cercle,text,nom,capacite,x,y);
         TableNode.add(element);
         System.out.println(Arrays.toString(TableNode.toArray()));
-        for(int i = 0; i < TableNode.size(); i++) {
-            System.out.print("nom = "+TableNode.get(i).nom+" - ");
-            System.out.print("x = "+TableNode.get(i).x+" - ");
-            System.out.print("y = "+TableNode.get(i).y+" - ");
-            System.out.print("capacite = "+TableNode.get(i).capacite+"\n");
+        for (VectorNode vectorNode : TableNode) {
+            System.out.print("nom = " + vectorNode.nom + " - ");
+            System.out.print("x = " + vectorNode.x + " - ");
+            System.out.print("y = " + vectorNode.y + " - ");
+            System.out.print("capacite = " + vectorNode.capacite + "\n");
         }
     }
 
 
-    public void createarc(String nom,Integer capacite,String depart,String arrivee) {//A modifier avec le corps de l'algo
+    private void createarc(String nom, Integer capacite, String depart, String arrivee) {//A modifier avec le corps de l'algo
         boolean NodeDEPExist=false;
         boolean NodeARRExist =false;
 
@@ -176,28 +176,32 @@ public class MenuController<E> {
             System.out.println("le node de depart "+depart +" n'existe pas");
             System.exit(1);
         }
+        Double DX=departNode.x;
+        Double DY=departNode.y;
+        Double FX=arriveNode.x;
+        Double FY=arriveNode.y;
         Line line = new Line();
-        /*line.setStartX(DX+183);
+        line.setStartX(DX+183);
         line.setStartY(DY);
         line.setEndX(FX+183);
         line.setEndY(FY);
         line.setStroke(Color.GREEN);
-        line.setStrokeWidth(r);
+        line.setStrokeWidth(capacite);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
-        */
+
         //Création de l'espace de stockage des Arcs
-        VectorArc element = new VectorArc(line,nom,capacite,depart,arrivee);
+        VectorArc element = new VectorArc(line,nom,capacite,departNode,arriveNode);
         TableArc.add(element);
         System.out.println(Arrays.toString(TableArc.toArray()));
-        for(int i = 0; i < TableArc.size(); i++) {
-            System.out.print("nom = "+TableArc.get(i).nom+" - ");
-            System.out.print("depart = "+TableArc.get(i).depart+" - ");
-            System.out.print("arrive = "+TableArc.get(i).arrivee+" - ");
-            System.out.print("capacite = "+TableArc.get(i).depart+"\n");
+        for (VectorArc vectorArc : TableArc) {
+            System.out.print("nom = " + vectorArc.nom + " - ");
+            System.out.print("depart = " + vectorArc.depart + " - ");
+            System.out.print("arrive = " + vectorArc.arrivee + " - ");
+            System.out.print("capacite = " + vectorArc.depart + "\n");
         }
 
     }
-    public void createobjet(Double x,Double y,String nom,String donnees,String depart,String arrivee,Double vitesse) {//A modifier avec le corps de l'algo
+    private void createobjet(Double x, Double y, String nom, String donnees, String depart, String arrivee, Double vitesse) {//A modifier avec le corps de l'algo
         Circle cercle = new Circle();
         boolean NodeDEPExist=false;
         boolean NodeARRExist =false;
@@ -232,21 +236,21 @@ public class MenuController<E> {
             System.out.println("le node de depart "+depart +" n'existe pas");
             System.exit(1);
         }
+
+
         VectorArc vectorArc = null;
-        if(NodeARRExist && NodeDEPExist){
-            boolean ArcExist=false;
-            int k=0;
-            while (!ArcExist && k<TableArc.size()){
-                if(TableArc.get(k).depart.equals(depart)){
-                    ArcExist = true;
-                    vectorArc = TableArc.get(k);
-                }
-                k++;
+        boolean ArcExist=false;
+        int k=0;
+        while (!ArcExist && k<TableArc.size()){
+            if(TableArc.get(k).depart.equals(depart)){
+                ArcExist = true;
+                vectorArc = TableArc.get(k);
             }
-            if(!ArcExist){
-                System.out.println("l'arc partant du Node "+depart +" n'existe pas");
-                System.exit(1);
-            }
+            k++;
+        }
+        if(!ArcExist){
+            System.out.println("l'arc partant du Node "+depart +" n'existe pas");
+            System.exit(1);
         }
 
 
@@ -265,14 +269,14 @@ public class MenuController<E> {
         VectorObject element = new VectorObject(cercle,x,y,nom,donnees,departNode,arriveNode,vitesse,text,vectorArc,this.temps);
         TableObject.add(element);
         System.out.println(Arrays.toString(TableObject.toArray()));
-        for(int i = 0; i < TableObject.size(); i++) {
-            System.out.print("nom = "+TableObject.get(i).nom+" - ");
-            System.out.print("x = "+TableObject.get(i).x+" - ");
-            System.out.print("y = "+TableObject.get(i).y+" - ");
-            System.out.print("depart = "+TableObject.get(i).depart+" - ");
-            System.out.print("arrive = "+TableObject.get(i).arrivee+" - ");
-            System.out.print("donnees = "+TableObject.get(i).donnee+" - ");
-            System.out.print("vitesse = "+TableObject.get(i).vitesse+"\n");
+        for (VectorObject vectorObject : TableObject) {
+            System.out.print("nom = " + vectorObject.nom + " - ");
+            System.out.print("x = " + vectorObject.x + " - ");
+            System.out.print("y = " + vectorObject.y + " - ");
+            System.out.print("depart = " + vectorObject.depart + " - ");
+            System.out.print("arrive = " + vectorObject.arrivee + " - ");
+            System.out.print("donnees = " + vectorObject.donnee + " - ");
+            System.out.print("vitesse = " + vectorObject.vitesse + "\n");
         }
 
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
@@ -301,13 +305,12 @@ public class MenuController<E> {
         double y = mouseEvent.getY();
         System.out.println("X : "+x+" // Y : "+y);
         if(radioAjouter.isSelected()){
-            Parent root = null;
             if(radioArc.isSelected()){ //Faut 2 points peut etre indiquer dans les champs
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("arc.fxml"));
                     Parent p = loader.load();
                     ArcController arcController = loader.getController();
-                    arcController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
+                    arcController.setCoord("X : "+ x,"Y : "+ y);
                     Stage fils = new Stage();
                     fils.setTitle("Création Arc");
                     fils.setScene(new Scene(p, 400, 200));
@@ -321,9 +324,7 @@ public class MenuController<E> {
                         arcController.getfin();
                         this.createarc(arcController.getnom(), arcController.getcapacity(), arcController.getdebut(), arcController.getfin());
                     }
-                } catch (IOException e){
-                    e.printStackTrace();
-                } catch (NullPointerException e){
+                } catch (IOException | NullPointerException e){
                     e.printStackTrace();
                 }
             } else if (radioNoeud.isSelected()){
@@ -331,7 +332,7 @@ public class MenuController<E> {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("node.fxml"));
                     Parent p = loader.load();
                     nodeController nodeController = loader.getController();
-                    nodeController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
+                    nodeController.setCoord("X : "+ x,"Y : "+ y);
                     Stage fils = new Stage();
                     fils.setTitle("Création Noeud");
                     fils.setScene(new Scene(p, 400, 200));
@@ -343,9 +344,7 @@ public class MenuController<E> {
 
                         this.createNode(x, y, (double) nodeController.getcapacite(), nodeController.getname());
                     }
-                } catch (IOException e){
-                    e.printStackTrace();
-                } catch (NullPointerException e){
+                } catch (IOException | NullPointerException e){
                     e.printStackTrace();
                 }
             } else if (radioObjet.isSelected()) {
@@ -367,9 +366,7 @@ public class MenuController<E> {
                         objetController.getVitesse();
 
                         this.createobjet(x, y, objetController.getname(), objetController.getDonnees(), objetController.getDepart(), objetController.getArrivee(), objetController.getVitesse());
-                    }} catch (IOException e){
-                    e.printStackTrace();
-                } catch (NullPointerException e){
+                    }} catch (IOException | NullPointerException e){
                     e.printStackTrace();
                 }
             } else {
