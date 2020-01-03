@@ -313,7 +313,7 @@ public class MenuController<E> {
                     arcController.setCoord("X : "+ x,"Y : "+ y);
                     Stage fils = new Stage();
                     fils.setTitle("Création Arc");
-                    fils.setScene(new Scene(p, 400, 200));
+                    fils.setScene(new Scene(p, 400, 240));
                     fils.showAndWait();
 
                     if (arcController.isvalide()) {

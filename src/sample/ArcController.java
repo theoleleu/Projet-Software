@@ -10,6 +10,7 @@ public class ArcController {
     public javafx.scene.control.Button validerButton;
     public javafx.scene.control.TextField NameArc;
     public javafx.scene.control.TextField CapacityArc;
+    public javafx.scene.control.TextField LongueurArc;
     public javafx.scene.control.CheckBox DoubleSens;
     public javafx.scene.control.Label Erreur;
     public javafx.scene.control.Label positionX;
@@ -21,6 +22,7 @@ public class ArcController {
     private String debut;
     private String fin;
     private boolean valide;
+    private double longueur;
 
     public ArcController(){
         this.valide=false;
@@ -50,6 +52,9 @@ public class ArcController {
     public String getfin(){
         return this.fin;
     }
+    public Double getlongueur(){
+        return this.longueur;
+    }
     public void validerFen(ActionEvent actionEvent) {
         if(NameArc.getText().equals("") || CapacityArc.equals("")){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -64,6 +69,7 @@ public class ArcController {
                 Integer.parseInt(CapacityArc.getText());
                 System.out.println(CapacityArc.getText());
                 this.capacity=Integer.parseInt(CapacityArc.getText());
+                this.longueur=Double.parseDouble(LongueurArc.getText());
                 System.out.println(DebutArc.getText());
                 this.debut=DebutArc.getText();
                 System.out.println(FinArc.getText());
