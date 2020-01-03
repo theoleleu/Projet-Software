@@ -17,8 +17,8 @@
                     <toggleGroup>
                         <ToggleGroup fx:id="Element" />
                     </toggleGroup></RadioButton>
-                <RadioButton fx:id="radioArc" layoutX="16.0" layoutY="229.0" mnemonicParsing="false" text="Arc" toggleGroup="$Element" />
-                <RadioButton fx:id="radioObjet" layoutX="16.0" layoutY="201.0" mnemonicParsing="false" text="Objet" toggleGroup="$Element" />
+                <RadioButton fx:id="radioArc" layoutX="16.0" layoutY="201.0" mnemonicParsing="false" text="Arc" toggleGroup="$Element" />
+                <RadioButton fx:id="radioObjet" layoutX="16.0" layoutY="229.0" mnemonicParsing="false" text="Objet" toggleGroup="$Element" />
                 <Label layoutX="3.0" layoutY="14.0" text="Ajouter / Supprimer :" />
                 <Label layoutX="6.0" layoutY="144.0" text="Element :" />
                 <RadioButton fx:id="radioSupprimer" layoutX="16.0" layoutY="62.0" mnemonicParsing="false" text="Supprimer">
