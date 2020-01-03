@@ -21,8 +21,8 @@
         <Label layoutX="10.0" layoutY="135.0" text="Fin :" />
         <Label fx:id="Erreur" layoutX="20.0" layoutY="125.0" text="" />
         <TextField fx:id="NameArc" layoutX="81.0" layoutY="15.0" />
-        <TextField fx:id="LongueurArc" layoutX="81.0" layoutY="45.0" />
-        <TextField fx:id="CapacityArc" layoutX="81.0" layoutY="75.0" />
+        <TextField fx:id="LongueurArc" layoutX="81.0" layoutY="75.0" />
+        <TextField fx:id="CapacityArc" layoutX="81.0" layoutY="45.0" />
         <TextField fx:id="DebutArc" layoutX="81.0" layoutY="105.0" />
         <TextField fx:id="FinArc" layoutX="81.0" layoutY="135.0" />
 

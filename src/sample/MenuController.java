@@ -296,7 +296,6 @@ public class MenuController<E> {
         this.temps+=1;
         for (VectorObject objet : TableObject){
             Double lambda=objet.vitesse*(this.temps-objet.t0)/(objet.arc.longueur);
-            //System.out.println(lambda);
             if (lambda<1 & lambda>0) {
                 objet.x = (1 - lambda) * objet.depart.x + lambda * objet.arrivee.x;
                 objet.y = (1 - lambda) * objet.depart.y + lambda * objet.arrivee.y;
