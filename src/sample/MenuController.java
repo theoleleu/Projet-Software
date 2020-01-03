@@ -293,8 +293,7 @@ public class MenuController<E> {
         stage.close();
     }
     public void avancer(){
-
-        this.temps++;
+        this.temps+=1;
         for (VectorObject objet : TableObject){
             Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.arc.longueur;
             if (lambda<1 & lambda>0) {
