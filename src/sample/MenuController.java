@@ -50,19 +50,19 @@ public class MenuController<E> {
         cercle.setCenterX(x+183);//réglage de la position, de la taille et de la couleur du cercle
         cercle.setCenterY(y);
         cercle.setRadius(r);
+        Text text = new Text();
+        text.setX(x+178);
+        text.setY(y+2);
+        text.setText(nom);
         Random rand = new Random();
         float r1 = rand.nextFloat();
         float g = rand.nextFloat();
         float b = rand.nextFloat();
         cercle.setFill(new Color(r1,g,b,1));
-        cercle.setStroke(Color.BLACK);//réglage de la couleur de la bordure et de son épaisseur
+        cercle.setStroke(Color.BLACK);//réglage de la couleur
         cercle.setStrokeWidth(1);
         this.root.getChildren().add(cercle);//on ajoute le cercle au groupe root
-        Text text = new Text();
-        text.setX(x+178);
-        text.setY(y+2);
-        text.setText(nom);
-        this.root.getChildren().add(text);
+        this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
     }
     public void createarc(Double DX,Double DY,Double FX,Double FY,Double r) {//A modifier avec le corps de l'algo
         Line line = new Line();
@@ -72,7 +72,7 @@ public class MenuController<E> {
         line.setEndY(FY);
         line.setStroke(Color.GREEN);
         line.setStrokeWidth(r);
-        this.root.getChildren().add(line);
+        this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
     }
     public void createobjet(Double x,Double y,String nom) {//A modifier avec le corps de l'algo
         Circle cercle = new Circle();
@@ -80,12 +80,12 @@ public class MenuController<E> {
         cercle.setCenterY(y);
         cercle.setRadius(5);
         cercle.setFill(Color.BLACK);
-        this.root.getChildren().add(cercle);
+        this.root.getChildren().add(cercle);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
         Text text = new Text();
         text.setX(x+178);
         text.setY(y);
         text.setText(nom);
-        this.root.getChildren().add(text);
+        this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
     }
 
     public void quitFen(ActionEvent actionEvent) {
