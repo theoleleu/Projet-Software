@@ -100,6 +100,7 @@ public class MenuController<E> {
     public void setRoot(Group root) {
         this.root = root;
     }
+
     public void createNode(Double x,Double y,Double capacite,String nom) {//Permet d'afficher un Noeud
         Circle cercle = new Circle();
         cercle.setCenterX(x+183);//réglage de la position, de la taille et de la couleur du cercle
@@ -118,6 +119,9 @@ public class MenuController<E> {
         cercle.setStrokeWidth(1);
         this.root.getChildren().add(cercle);//on ajoute le cercle au groupe root
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
+
+        //Création de l'espace de stockage des Noeuds
+
         VectorNode element = new VectorNode(cercle,text,nom,capacite,x,y);
         TableNode.add(element);
         System.out.println(Arrays.toString(TableNode.toArray()));
@@ -128,6 +132,8 @@ public class MenuController<E> {
             System.out.print("capacite = "+TableNode.get(i).capacite+"\n");
         }
     }
+
+
     public void createarc(String nom,Integer capacite,String depart,String arrivee) {//A modifier avec le corps de l'algo
         Line line = new Line();
         /*line.setStartX(DX+183);
@@ -138,6 +144,9 @@ public class MenuController<E> {
         line.setStrokeWidth(r);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
         */
+
+
+        //Création de l'espace de stockage des Arcs
         VectorArc element = new VectorArc(line,nom,capacite,depart,arrivee);
         TableArc.add(element);
         System.out.println(Arrays.toString(TableArc.toArray()));
@@ -160,6 +169,10 @@ public class MenuController<E> {
         text.setX(x+178);
         text.setY(y);
         text.setText(nom);
+
+
+        
+        //Création de l'espace de stockage des Objets
         VectorObject element = new VectorObject(cercle,x,y,nom,donnees,depart,arrivee,vitesse,text);
         TableObject.add(element);
         System.out.println(Arrays.toString(TableObject.toArray()));
