@@ -188,7 +188,7 @@ public class MenuController<E> {
         line.setEndX(FX+183);
         line.setEndY(FY);
         line.setStroke(Color.GREEN);
-        line.setStrokeWidth(capacite/2);
+        line.setStrokeWidth(capacite/5);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
         //Création de l'espace de stockage des Arcs
@@ -295,7 +295,8 @@ public class MenuController<E> {
     public void avancer(){
         this.temps+=1;
         for (VectorObject objet : TableObject){
-            Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.arc.longueur;
+            Double lambda=objet.vitesse*(this.temps-objet.t0)/(objet.arc.longueur);
+            //System.out.println(lambda);
             if (lambda<1 & lambda>0) {
                 objet.x = (1 - lambda) * objet.depart.x + lambda * objet.arrivee.x;
                 objet.y = (1 - lambda) * objet.depart.y + lambda * objet.arrivee.y;
