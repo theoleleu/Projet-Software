@@ -171,7 +171,7 @@ public class MenuController<E> {
         text.setText(nom);
 
 
-        
+
         //Création de l'espace de stockage des Objets
         VectorObject element = new VectorObject(cercle,x,y,nom,donnees,depart,arrivee,vitesse,text);
         TableObject.add(element);
@@ -188,6 +188,8 @@ public class MenuController<E> {
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
     }
+
+
 
     public void quitFen(ActionEvent actionEvent) {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
