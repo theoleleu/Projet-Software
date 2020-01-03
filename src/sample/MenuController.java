@@ -108,7 +108,7 @@ public class MenuController<E> {
                     ArcController arcController = loader.getController();
                     arcController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
 
-                    arcController.getInfo();
+                    arcController.getnom();
                     Stage fils = new Stage();
                     fils.setTitle("Création Arc");
                     fils.setScene(new Scene(p, 400, 200));
