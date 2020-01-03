@@ -188,7 +188,7 @@ public class MenuController<E> {
         line.setEndX(FX+183);
         line.setEndY(FY);
         line.setStroke(Color.GREEN);
-        line.setStrokeWidth(capacite/5);
+        line.setStrokeWidth(2);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
         //Création de l'espace de stockage des Arcs
@@ -397,9 +397,11 @@ public class MenuController<E> {
             if(radioArc.isSelected()){
                 //this.root.getChildren().remove(line);
             } else if (radioNoeud.isSelected()){
-
+                    //this.root.getChildren().remove(cercle);
+                    //this.root.getChildren().remove(text);
             } else if (radioObjet.isSelected()){
-
+                //this.root.getChildren().remove(cercle);
+                //this.root.getChildren().remove(text;
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Suppression");
