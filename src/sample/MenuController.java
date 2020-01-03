@@ -74,7 +74,7 @@ public class MenuController<E> {
         line.setStrokeWidth(r);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
     }
-    public void createobjet(Double x,Double y,String nom) {//A modifier avec le corps de l'algo
+    public void createobjet(Double x,Double y,String nom,String donnees,String depart,String arrivee,Double vitesse) {//A modifier avec le corps de l'algo
         Circle cercle = new Circle();
         cercle.setCenterX(x+183);
         cercle.setCenterY(y);
@@ -151,8 +151,7 @@ public class MenuController<E> {
                     objetController.getDepart();
                     objetController.getArrivee();
                     objetController.getVitesse();
-
-                    this.createobjet(x,y,objetController.getname());
+                    this.createobjet(x,y,objetController.getname(),objetController.getDonnees(),objetController.getDepart(),objetController.getArrivee(),objetController.getVitesse());
                 } catch (IOException e){
                     e.printStackTrace();
                 } catch (NullPointerException e){

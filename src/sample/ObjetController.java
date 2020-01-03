@@ -36,16 +36,16 @@ public class ObjetController {
         stage.close();
     }
     public String getDonnees(){
-        return tfDonnees.getText();
+        return this.Donnees;
     }
     public String getDepart(){
-        return tfArrivee.getText();
+        return this.Depart;
     }
     public String getArrivee(){
-        return tfDepart.getText();
+        return this.Arrivee;
     }
-    public String getVitesse(){
-        return this.tfVitesse.getText();
+    public Double getVitesse(){
+        return this.Vitesse;
     }
     public void validerFen(ActionEvent actionEvent) {
         if(tfNom.getText().equals("") || tfDonnees.getText().equals("") || tfDepart.getText().equals("") || tfArrivee.getText().equals("") || tfVitesse.getText().equals("")){
