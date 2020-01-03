@@ -342,7 +342,7 @@ public class MenuController<E> {
                         nodeController.getname();
                         nodeController.getcapacite();
 
-                        this.createNode(x, y, (double) nodeController.getcapacite(), nodeController.getname());
+                        this.createNode(x, y, nodeController.getcapacite(), nodeController.getname());
                     }
                 } catch (IOException | NullPointerException e){
                     e.printStackTrace();
@@ -352,7 +352,7 @@ public class MenuController<E> {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("objet.fxml"));
                     Parent p = loader.load();
                     ObjetController objetController = loader.getController();
-                    objetController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
+                    objetController.setCoord("X : "+ x,"Y : "+ y);
                     Stage fils = new Stage();
                     fils.setTitle("Création Objet");
                     fils.setScene(new Scene(p, 400, 200));
