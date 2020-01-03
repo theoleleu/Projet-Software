@@ -49,14 +49,16 @@ class VectorObject
     }
 class VectorArc
 {
+    Double longueur;
     Line line;
     String nom;
     Integer capacite;
     VectorNode depart;
     VectorNode arrivee;
-    public VectorArc(Line line,String nom,Integer capacite,VectorNode depart,VectorNode arrivee){
+    public VectorArc(Line line,String nom,Integer capacite,VectorNode depart,VectorNode arrivee,Double longueur){
         this.line = line;
         this.nom = nom;
+        this.longueur=longueur;
         this.depart = depart;
         this.arrivee = arrivee;
         this.capacite = capacite;
@@ -144,7 +146,7 @@ public class MenuController<E> {
     }
 
 
-    private void createarc(String nom, Integer capacite, String depart, String arrivee) {//A modifier avec le corps de l'algo
+    private void createarc(String nom, Integer capacite, String depart, String arrivee,Double longueur) {//A modifier avec le corps de l'algo
         boolean NodeDEPExist=false;
         boolean NodeARRExist =false;
 
@@ -190,14 +192,15 @@ public class MenuController<E> {
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
         //Création de l'espace de stockage des Arcs
-        VectorArc element = new VectorArc(line,nom,capacite,departNode,arriveNode);
+        VectorArc element = new VectorArc(line,nom,capacite,departNode,arriveNode,longueur);
         TableArc.add(element);
         System.out.println(Arrays.toString(TableArc.toArray()));
         for (VectorArc vectorArc : TableArc) {
             System.out.print("nom = " + vectorArc.nom + " - ");
             System.out.print("depart = " + vectorArc.depart + " - ");
             System.out.print("arrive = " + vectorArc.arrivee + " - ");
-            System.out.print("capacite = " + vectorArc.depart + "\n");
+            System.out.print("longueur = " + vectorArc.longueur + " - ");
+            System.out.print("capacite = " + vectorArc.capacite + "\n");
         }
 
     }
@@ -293,7 +296,7 @@ public class MenuController<E> {
 
         this.temps++;
         for (VectorObject objet : TableObject){
-            Double lambda=objet.vitesse*(this.temps-objet.t0);
+            Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.arc.longueur;
             objet.x=lambda*objet.depart.y+(1-lambda)*objet.arrivee.x;
             objet.y=lambda*objet.depart.x+(1-lambda)*objet.arrivee.y;
             objet.cercle.setCenterX(objet.x+183);//réglage de la position, de la taille et de la couleur du cercle
@@ -322,7 +325,7 @@ public class MenuController<E> {
                         arcController.getcapacity();
                         arcController.getdebut();
                         arcController.getfin();
-                        this.createarc(arcController.getnom(), arcController.getcapacity(), arcController.getdebut(), arcController.getfin());
+                        this.createarc(arcController.getnom(), arcController.getcapacity(), arcController.getdebut(), arcController.getfin(),arcController.getlongueur());
                     }
                 } catch (IOException | NullPointerException e){
                     e.printStackTrace();
