@@ -59,10 +59,10 @@ class VectorNode
 {   Circle cercle;
     Text text;
     String nom;
-    String capacite;
+    Double capacite;
     Double x;
     Double y;
-    public VectorNode(Circle cercle, Text text, String nom, String capacite, Double x,Double y)
+    public VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x,Double y)
     {
         this.cercle = cercle;
         this.nom = nom;
@@ -77,6 +77,8 @@ class VectorNode
 public class MenuController<E> {
 
     private ArrayList<VectorObject> TableObject = new ArrayList<VectorObject>(13);
+    private ArrayList<VectorArc> TableArc = new ArrayList<VectorArc>(13);
+    private ArrayList<VectorNode> TableNode = new ArrayList<VectorNode>(13);
     private double temps;
     public javafx.scene.control.RadioButton radioNoeud;
     public javafx.scene.control.RadioButton radioArc;
@@ -98,11 +100,11 @@ public class MenuController<E> {
     public void setRoot(Group root) {
         this.root = root;
     }
-    public void createNode(Double x,Double y,Double r,String nom) {//Permet d'afficher un Noeud
+    public void createNode(Double x,Double y,Double capacite,String nom) {//Permet d'afficher un Noeud
         Circle cercle = new Circle();
         cercle.setCenterX(x+183);//réglage de la position, de la taille et de la couleur du cercle
         cercle.setCenterY(y);
-        cercle.setRadius(r);
+        cercle.setRadius(capacite);
         Text text = new Text();
         text.setX(x+178);
         text.setY(y+2);
@@ -116,16 +118,36 @@ public class MenuController<E> {
         cercle.setStrokeWidth(1);
         this.root.getChildren().add(cercle);//on ajoute le cercle au groupe root
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
+        VectorNode element = new VectorNode(cercle,text,nom,capacite,x,y);
+        TableNode.add(element);
+        System.out.println(Arrays.toString(TableNode.toArray()));
+        for(int i = 0; i < TableNode.size(); i++) {
+            System.out.print("nom = "+TableNode.get(i).nom+" - ");
+            System.out.print("x = "+TableNode.get(i).x+" - ");
+            System.out.print("y = "+TableNode.get(i).y+" - ");
+            System.out.print("capacite = "+TableNode.get(i).capacite+"\n");
+        }
     }
-    public void createarc(Double DX,Double DY,Double FX,Double FY,Double r) {//A modifier avec le corps de l'algo
+    public void createarc(String nom,Integer capacite,String depart,String arrivee) {//A modifier avec le corps de l'algo
         Line line = new Line();
-        line.setStartX(DX+183);
+        /*line.setStartX(DX+183);
         line.setStartY(DY);
         line.setEndX(FX+183);
         line.setEndY(FY);
         line.setStroke(Color.GREEN);
         line.setStrokeWidth(r);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
+        */
+        VectorArc element = new VectorArc(line,nom,capacite,depart,arrivee);
+        TableArc.add(element);
+        System.out.println(Arrays.toString(TableArc.toArray()));
+        for(int i = 0; i < TableArc.size(); i++) {
+            System.out.print("nom = "+TableArc.get(i).nom+" - ");
+            System.out.print("depart = "+TableArc.get(i).depart+" - ");
+            System.out.print("arrive = "+TableArc.get(i).arrivee+" - ");
+            System.out.print("capacite = "+TableArc.get(i).depart+"\n");
+        }
+
     }
     public void createobjet(Double x,Double y,String nom,String donnees,String depart,String arrivee,Double vitesse) {//A modifier avec le corps de l'algo
         Circle cercle = new Circle();
@@ -185,7 +207,7 @@ public class MenuController<E> {
                     fils.setTitle("Création Arc");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
-                    //this.createarc(arcController.DX(), arcController.DY(), arcController.FX(), arcController.FY(), arcController.getwidth());
+                    this.createarc(arcController.getnom(),arcController.getcapacity(), arcController.getdebut(),arcController.getfin());
                 } catch (IOException e){
                     e.printStackTrace();
                 } catch (NullPointerException e){
