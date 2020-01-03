@@ -19,7 +19,11 @@ import java.util.*;
 
 class VectorObject
     {
-        public VectorObject(Circle cercle,Double x,Double y, String nom, String donnee, String depart, String arrivee, Double vitesse, Text text) {
+
+
+
+
+        public VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, String depart, String arrivee, Double vitesse, Text text, Double t0) {
             this.cercle = cercle;
             this.nom = nom;
             this.x = x;
@@ -29,8 +33,9 @@ class VectorObject
             this.arrivee = arrivee;
             this.vitesse = vitesse;
             this.text = text;
+            this.t0=t0;
         }
-
+        Double t0;
         Circle cercle;
         String nom;
         String donnee;
@@ -204,7 +209,7 @@ public class MenuController<E> {
 
 
         //Création de l'espace de stockage des Objets
-        VectorObject element = new VectorObject(cercle,x,y,nom,donnees,depart,arrivee,vitesse,text);
+        VectorObject element = new VectorObject(cercle,x,y,nom,donnees,depart,arrivee,vitesse,text,this.temps);
         TableObject.add(element);
         System.out.println(Arrays.toString(TableObject.toArray()));
         for(int i = 0; i < TableObject.size(); i++) {
@@ -214,7 +219,8 @@ public class MenuController<E> {
             System.out.print("depart = "+TableObject.get(i).depart+" - ");
             System.out.print("arrive = "+TableObject.get(i).arrivee+" - ");
             System.out.print("donnees = "+TableObject.get(i).donnee+" - ");
-            System.out.print("vitesse = "+TableObject.get(i).vitesse+"\n");
+            System.out.print("vitesse = "+TableObject.get(i).vitesse+" - ");
+            System.out.print("tempscrea = "+TableObject.get(i).t0+"\n");
         }
 
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
@@ -229,6 +235,11 @@ public class MenuController<E> {
     }
     public void avancer(){
         this.temps++;
+        for (VectorObject objet : TableObject){
+            //Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.distance;
+            //objet.x=lambda*objet.depart.y+(1-lambda)*objet.arrivee.x;
+            //objet.y=lambda*objet.depart.x+(1-lambda)*objet.arrivee.y;
+        }
     }
     public void CanvasFunction(MouseEvent mouseEvent) {
         double x = mouseEvent.getX();
