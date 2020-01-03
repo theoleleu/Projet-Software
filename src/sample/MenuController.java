@@ -19,11 +19,7 @@ import java.util.*;
 
 class VectorObject
     {
-
-
-
-
-        public VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, String depart, String arrivee, Double vitesse, Text text, Double t0) {
+        public VectorObject(Circle cercle,Double x,Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text,VectorArc arc) {
             this.cercle = cercle;
             this.nom = nom;
             this.x = x;
@@ -33,18 +29,19 @@ class VectorObject
             this.arrivee = arrivee;
             this.vitesse = vitesse;
             this.text = text;
-            this.t0=t0;
+            this.arc = arc;
         }
-        Double t0;
+
         Circle cercle;
         String nom;
         String donnee;
-        String depart;
-        String arrivee;
+        VectorNode depart;
+        VectorNode arrivee;
         Double vitesse;
         Text text;
         Double x;
         Double y;
+        VectorArc arc;
     }
 class VectorArc
 {   Line line;
@@ -168,8 +165,9 @@ public class MenuController<E> {
         Circle cercle = new Circle();
         boolean NodeDEPExist=false;
         boolean NodeARRExist =false;
-        VectorNode departNode;
-        VectorNode arriveNode;
+
+        VectorNode departNode = null;
+        VectorNode arriveNode = null;
         int j=0;
         while ((!NodeDEPExist || !NodeARRExist )  && j<TableNode.size()){
             if(!NodeDEPExist){
@@ -192,11 +190,30 @@ public class MenuController<E> {
         }
         if(!NodeARRExist){
             System.out.println("le node d'arrive "+arrivee +" n'existe pas");
-
+            System.exit(1);
         }
         if(!NodeDEPExist){
             System.out.println("le node de depart "+depart +" n'existe pas");
+            System.exit(1);
         }
+        VectorArc vectorArc = null;
+        if(NodeARRExist && NodeDEPExist){
+            boolean ArcExist=false;
+            int k=0;
+            while (!ArcExist && k<TableArc.size()){
+                if(TableArc.get(k).depart.equals(depart)){
+                    ArcExist = true;
+                    vectorArc = TableArc.get(k);
+                }
+                k++;
+            }
+            if(!ArcExist){
+                System.out.println("l'arc partant du Node "+depart +" n'existe pas");
+                System.exit(1);
+            }
+        }
+
+
         cercle.setCenterX(x+183);
         cercle.setCenterY(y);
         cercle.setRadius(5);
@@ -209,7 +226,7 @@ public class MenuController<E> {
 
 
         //Création de l'espace de stockage des Objets
-        VectorObject element = new VectorObject(cercle,x,y,nom,donnees,depart,arrivee,vitesse,text,this.temps);
+        VectorObject element = new VectorObject(cercle,x,y,nom,donnees,departNode,arriveNode,vitesse,text,vectorArc);
         TableObject.add(element);
         System.out.println(Arrays.toString(TableObject.toArray()));
         for(int i = 0; i < TableObject.size(); i++) {
@@ -219,8 +236,7 @@ public class MenuController<E> {
             System.out.print("depart = "+TableObject.get(i).depart+" - ");
             System.out.print("arrive = "+TableObject.get(i).arrivee+" - ");
             System.out.print("donnees = "+TableObject.get(i).donnee+" - ");
-            System.out.print("vitesse = "+TableObject.get(i).vitesse+" - ");
-            System.out.print("tempscrea = "+TableObject.get(i).t0+"\n");
+            System.out.print("vitesse = "+TableObject.get(i).vitesse+"\n");
         }
 
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
@@ -235,11 +251,6 @@ public class MenuController<E> {
     }
     public void avancer(){
         this.temps++;
-        for (VectorObject objet : TableObject){
-            //Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.distance;
-            //objet.x=lambda*objet.depart.y+(1-lambda)*objet.arrivee.x;
-            //objet.y=lambda*objet.depart.x+(1-lambda)*objet.arrivee.y;
-        }
     }
     public void CanvasFunction(MouseEvent mouseEvent) {
         double x = mouseEvent.getX();
