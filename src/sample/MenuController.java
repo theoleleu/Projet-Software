@@ -108,6 +108,8 @@ public class MenuController<E> {
                     ArcController arcController = loader.getController();
                     arcController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
 
+
+                    // Utiliser les fonctions extraites de l'interface
                     arcController.getnom();
                     arcController.getcapacity();
                     arcController.getdebut();
@@ -134,6 +136,7 @@ public class MenuController<E> {
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
 
+                    //Utiliser les fonctions extraites de l'interface
                     nodeController.getname();
                     nodeController.getcapacite();
 
