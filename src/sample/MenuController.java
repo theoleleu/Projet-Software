@@ -109,6 +109,10 @@ public class MenuController<E> {
                     arcController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
 
                     arcController.getnom();
+                    arcController.getcapacity();
+                    arcController.getdebut();
+                    arcController.getfin();
+
                     Stage fils = new Stage();
                     fils.setTitle("Création Arc");
                     fils.setScene(new Scene(p, 400, 200));
@@ -129,7 +133,11 @@ public class MenuController<E> {
                     fils.setTitle("Création Noeud");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
-                    this.createNode(x,y, (double) nodeController.getradius(),nodeController.getname());
+
+                    nodeController.getname();
+                    nodeController.getcapacite();
+
+                    this.createNode(x,y, (double) nodeController.getcapacite(),nodeController.getname());
                 } catch (IOException e){
                     e.printStackTrace();
                 } catch (NullPointerException e){
@@ -145,12 +153,14 @@ public class MenuController<E> {
                     fils.setTitle("Création Objet");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
+
                     //utiliser les fonctions
                     objetController.getname();
                     objetController.getDonnees();
                     objetController.getDepart();
                     objetController.getArrivee();
                     objetController.getVitesse();
+
                     this.createobjet(x,y,objetController.getname(),objetController.getDonnees(),objetController.getDepart(),objetController.getArrivee(),objetController.getVitesse());
                 } catch (IOException e){
                     e.printStackTrace();

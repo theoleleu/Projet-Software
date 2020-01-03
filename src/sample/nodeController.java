@@ -12,7 +12,7 @@ public class nodeController {
     public javafx.scene.control.Label capacityWarning;
     public javafx.scene.control.Label positionX;
     public javafx.scene.control.Label positionY;
-    double r;
+    double capacite;
     private String nom;
 
     public void setCoord(String x, String y){
@@ -25,8 +25,8 @@ public class nodeController {
     Stage stage = (Stage) closeButton.getScene().getWindow();
     stage.close();
     }
-    public double getradius(){
-            return this.r;
+    public double getcapacite(){
+            return this.capacite;
     }
     public String getname(){
         return this.nom;
@@ -41,7 +41,7 @@ public class nodeController {
                 System.out.println(name);
                 System.out.println(capacity);
                 this.nom=name;
-                this.r=capacity;
+                this.capacite=capacity;
                 Stage stage = (Stage) validateButton.getScene().getWindow();
                 stage.close();
             } catch (java.lang.RuntimeException e) {
