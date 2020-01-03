@@ -146,6 +146,7 @@ public class MenuController<E> {
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
                     //utiliser les fonctions
+                    objetController.getname();
                     objetController.getDonnees();
                     objetController.getDepart();
                     objetController.getArrivee();
