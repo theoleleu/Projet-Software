@@ -46,7 +46,13 @@ class VectorArc
     Integer capacite;
     String depart;
     String arrivee;
-    public VectorArc(){}
+    public VectorArc(Line line,String nom,Integer capacite,String depart,String arrivee){
+        this.line = line;
+        this.nom = nom;
+        this.depart = depart;
+        this.arrivee = arrivee;
+        this.capacite = capacite;
+    }
 
 }
 class VectorNode
@@ -54,7 +60,18 @@ class VectorNode
     Text text;
     String nom;
     String capacite;
-    public VectorNode(){}
+    Double x;
+    Double y;
+    public VectorNode(Circle cercle, Text text, String nom, String capacite, Double x,Double y)
+    {
+        this.cercle = cercle;
+        this.nom = nom;
+        this.text = text;
+        this.x = x;
+        this.y = y;
+        this.capacite = capacite;
+
+    }
 
 }
 public class MenuController<E> {
