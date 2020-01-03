@@ -23,6 +23,7 @@ class VectorObject
 
 
         public VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text,VectorArc arc, Double t0) {
+            this.t0=t0;
             this.cercle = cercle;
             this.nom = nom;
             this.x = x;
@@ -34,7 +35,7 @@ class VectorObject
             this.text = text;
             this.arc = arc;
         }
-
+        Double t0;
         Circle cercle;
         String nom;
         String donnee;
@@ -144,6 +145,37 @@ public class MenuController<E> {
 
 
     public void createarc(String nom,Integer capacite,String depart,String arrivee) {//A modifier avec le corps de l'algo
+        boolean NodeDEPExist=false;
+        boolean NodeARRExist =false;
+
+        VectorNode departNode = null;
+        VectorNode arriveNode = null;
+        int j=0;
+        while ((!NodeDEPExist || !NodeARRExist )  && j<TableNode.size()){
+            if(!NodeDEPExist){
+                if(TableNode.get(j).nom.equals(depart)){
+                    NodeDEPExist = true;
+                    departNode = TableNode.get(j);
+                    System.out.println("le node de depart est : "+TableNode.get(j).nom);
+                }
+            }
+            if(!NodeARRExist){
+                if(TableNode.get(j).nom.equals(arrivee)){
+                    NodeARRExist = true;
+                    arriveNode = TableNode.get(j);
+                    System.out.println("le node d'arrive est : "+TableNode.get(j).nom);
+                }
+            }
+            j++;
+        }
+        if(!NodeARRExist){
+            System.out.println("le node d'arrive "+arrivee +" n'existe pas");
+            System.exit(1);
+        }
+        if(!NodeDEPExist){
+            System.out.println("le node de depart "+depart +" n'existe pas");
+            System.exit(1);
+        }
         Line line = new Line();
         /*line.setStartX(DX+183);
         line.setStartY(DY);
@@ -153,8 +185,6 @@ public class MenuController<E> {
         line.setStrokeWidth(r);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
         */
-
-
         //Création de l'espace de stockage des Arcs
         VectorArc element = new VectorArc(line,nom,capacite,depart,arrivee);
         TableArc.add(element);
@@ -256,7 +286,15 @@ public class MenuController<E> {
         stage.close();
     }
     public void avancer(){
+
         this.temps++;
+        for (VectorObject objet : TableObject){
+            Double lambda=objet.vitesse*(this.temps-objet.t0);
+            objet.x=lambda*objet.depart.y+(1-lambda)*objet.arrivee.x;
+            objet.y=lambda*objet.depart.x+(1-lambda)*objet.arrivee.y;
+            objet.cercle.setCenterX(objet.x+183);//réglage de la position, de la taille et de la couleur du cercle
+            objet.cercle.setCenterY(objet.y);
+        }
     }
     public void CanvasFunction(MouseEvent mouseEvent) {
         double x = mouseEvent.getX();
