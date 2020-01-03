@@ -298,18 +298,24 @@ public class MenuController<E> {
         for (VectorObject objet : TableObject){
             Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.arc.longueur;
             if (lambda<1 & lambda>0) {
-                objet.x = lambda * objet.depart.y + (1 - lambda) * objet.arrivee.x;
-                objet.y = lambda * objet.depart.x + (1 - lambda) * objet.arrivee.y;
-                this.root.getChildren().remove(objet.cercle);
-                objet.cercle.setCenterX(objet.x + 183);//réglage de la position, de la taille et de la couleur du cercle
-                objet.cercle.setCenterY(objet.y);
-                this.root.getChildren().add(objet.cercle);
-                this.root.getChildren().remove(objet.text);
-                objet.text.setX(objet.x + 183);//réglage de la position, de la taille et de la couleur du text
-                objet.text.setY(objet.y);
-                this.root.getChildren().add(objet.text);
+                objet.x = (1 - lambda) * objet.depart.x + lambda * objet.arrivee.x;
+                objet.y = (1 - lambda) * objet.depart.y + lambda * objet.arrivee.y;
+
             }
+            else {
+                objet.x = objet.arrivee.x;
+                objet.y = objet.arrivee.y;
+            }
+            this.root.getChildren().remove(objet.cercle);
+            objet.cercle.setCenterX(objet.x + 183);//réglage de la position, de la taille et de la couleur du cercle
+            objet.cercle.setCenterY(objet.y);
+            this.root.getChildren().add(objet.cercle);
+            this.root.getChildren().remove(objet.text);
+            objet.text.setX(objet.x + 183);//réglage de la position, de la taille et de la couleur du text
+            objet.text.setY(objet.y);
+            this.root.getChildren().add(objet.text);
         }
+
     }
     public void CanvasFunction(MouseEvent mouseEvent) {
         double x = mouseEvent.getX();
