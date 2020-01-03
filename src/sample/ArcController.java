@@ -16,7 +16,10 @@ public class ArcController {
     public javafx.scene.control.Label positionY;
     public javafx.scene.control.TextField DebutArc;
     public javafx.scene.control.TextField FinArc;
-
+    private int capacity;
+    private String nom;
+    private String debut;
+    private String fin;
 
 
     public void setCoord(String x, String y){
@@ -29,8 +32,17 @@ public class ArcController {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
-    public void getInfo(){
-
+    public int getcapacity(){
+    return this.capacity;
+    }
+    public String getnom(){
+        return this.nom;
+    }
+    public String getdebut(){
+        return this.debut;
+    }
+    public String getfin(){
+        return this.fin;
     }
     public void validerFen(ActionEvent actionEvent) {
         if(NameArc.getText().equals("") || CapacityArc.equals("")){
@@ -41,11 +53,15 @@ public class ArcController {
             alert.showAndWait();
         } else {
             try {
-                Integer.parseInt(CapacityArc.getText());
                 System.out.println(NameArc.getText());
+                this.nom=NameArc.getText();
+                Integer.parseInt(CapacityArc.getText());
                 System.out.println(CapacityArc.getText());
+                this.capacity=Integer.parseInt(CapacityArc.getText());
                 System.out.println(DebutArc.getText());
+                this.debut=DebutArc.getText();
                 System.out.println(FinArc.getText());
+                this.fin=FinArc.getText();
                 if(DoubleSens.isSelected()){
                     System.out.println("Double sens : Activé");
                 } else {

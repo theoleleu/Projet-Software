@@ -53,8 +53,8 @@ public class MenuController<E> {
 
     public javafx.scene.control.Button btnQuitter;
     public javafx.scene.canvas.Canvas Canvas;
-    private ArrayList<ArrayList<Double>> Arcs;
-    private ArrayList<ArrayList<Double>> Noeuds;
+    private ArrayList<ArrayList<String>> Arcs;
+    private ArrayList<ArrayList<String>> Noeuds;
     private ArrayList<ArrayList<Double>> Objets;
     private Group root;
 
@@ -145,7 +145,13 @@ public class MenuController<E> {
                     ArcController arcController = loader.getController();
                     arcController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
 
-                    arcController.getInfo();
+
+                    // Utiliser les fonctions extraites de l'interface
+                    arcController.getnom();
+                    arcController.getcapacity();
+                    arcController.getdebut();
+                    arcController.getfin();
+
                     Stage fils = new Stage();
                     fils.setTitle("Création Arc");
                     fils.setScene(new Scene(p, 400, 200));
@@ -166,7 +172,12 @@ public class MenuController<E> {
                     fils.setTitle("Création Noeud");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
-                    this.createNode(x,y, (double) nodeController.getradius(),nodeController.getname());
+
+                    //Utiliser les fonctions extraites de l'interface
+                    nodeController.getname();
+                    nodeController.getcapacite();
+
+                    this.createNode(x,y, (double) nodeController.getcapacite(),nodeController.getname());
                 } catch (IOException e){
                     e.printStackTrace();
                 } catch (NullPointerException e){
@@ -182,12 +193,14 @@ public class MenuController<E> {
                     fils.setTitle("Création Objet");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
+
                     //utiliser les fonctions
                     objetController.getname();
                     objetController.getDonnees();
                     objetController.getDepart();
                     objetController.getArrivee();
                     objetController.getVitesse();
+
                     this.createobjet(x,y,objetController.getname(),objetController.getDonnees(),objetController.getDepart(),objetController.getArrivee(),objetController.getVitesse());
                 } catch (IOException e){
                     e.printStackTrace();
