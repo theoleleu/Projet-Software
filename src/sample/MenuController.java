@@ -41,11 +41,20 @@ class VectorObject
         Double y;
     }
 class VectorArc
-{
+{   Line line;
+    String nom;
+    Integer capacite;
+    String depart;
+    String arrivee;
+    public VectorArc(){}
 
 }
 class VectorNode
-{
+{   Circle cercle;
+    Text text;
+    String nom;
+    String capacite;
+    public VectorNode(){}
 
 }
 public class MenuController<E> {
