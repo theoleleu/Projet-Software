@@ -14,7 +14,9 @@ public class ArcController {
     public javafx.scene.control.Label Erreur;
     public javafx.scene.control.Label positionX;
     public javafx.scene.control.Label positionY;
+    public javafx.scene.control.TextField DebutArc;
     public javafx.scene.control.TextField FinArc;
+
 
 
     public void setCoord(String x, String y){
@@ -42,6 +44,7 @@ public class ArcController {
                 Integer.parseInt(CapacityArc.getText());
                 System.out.println(NameArc.getText());
                 System.out.println(CapacityArc.getText());
+                System.out.println(DebutArc.getText());
                 System.out.println(FinArc.getText());
                 if(DoubleSens.isSelected()){
                     System.out.println("Double sens : Activé");

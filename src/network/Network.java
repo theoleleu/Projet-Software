@@ -43,7 +43,7 @@ public class Network {
         this.nodes.remove(node);
     }
 
-    public void addArc(ARC arc){
+    public void addArc(Arc arc){
         this.arcs.add(arc);
     }
 
