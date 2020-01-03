@@ -14,11 +14,35 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
+class VectorObject
+    {
+        public VectorObject(Circle cercle,Double x,Double y, String nom, String donnee, String depart, String arrivee, Double vitesse, Text text) {
+            this.cercle = cercle;
+            this.nom = nom;
+            this.x = x;
+            this.y = y;
+            this.donnee = donnee;
+            this.depart = depart;
+            this.arrivee = arrivee;
+            this.vitesse = vitesse;
+            this.text = text;
+        }
+
+        Circle cercle;
+        String nom;
+        String donnee;
+        String depart;
+        String arrivee;
+        Double vitesse;
+        Text text;
+        Double x;
+        Double y;
+    };
 public class MenuController<E> {
 
+    private ArrayList<VectorObject> TableObject = new ArrayList<VectorObject>(13);
     private double temps;
     public javafx.scene.control.RadioButton radioNoeud;
     public javafx.scene.control.RadioButton radioArc;
@@ -85,7 +109,20 @@ public class MenuController<E> {
         text.setX(x+178);
         text.setY(y);
         text.setText(nom);
+        VectorObject element = new VectorObject(cercle,x,y,nom,donnees,depart,arrivee,vitesse,text);
+        TableObject.add(element);
+        System.out.println(Arrays.toString(TableObject.toArray()));
+        for(int i = 0; i < TableObject.size(); i++) {
+            System.out.print("nom = "+TableObject.get(i).nom+" - ");
+            System.out.print("x = "+TableObject.get(i).x+" - ");
+            System.out.print("y = "+TableObject.get(i).y+" - ");
+            System.out.print("depart = "+TableObject.get(i).depart+" - ");
+            System.out.print("arrive = "+TableObject.get(i).arrivee+" - ");
+            System.out.print("donnees = "+TableObject.get(i).donnee+" - ");
+            System.out.print("vitesse = "+TableObject.get(i).vitesse+"\n");
+        }
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
+
     }
 
     public void quitFen(ActionEvent actionEvent) {
