@@ -188,7 +188,7 @@ public class MenuController<E> {
         line.setEndX(FX+183);
         line.setEndY(FY);
         line.setStroke(Color.GREEN);
-        line.setStrokeWidth(capacite);
+        line.setStrokeWidth(capacite/2);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
         //Création de l'espace de stockage des Arcs
@@ -297,16 +297,18 @@ public class MenuController<E> {
         this.temps++;
         for (VectorObject objet : TableObject){
             Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.arc.longueur;
-            objet.x=lambda*objet.depart.y+(1-lambda)*objet.arrivee.x;
-            objet.y=lambda*objet.depart.x+(1-lambda)*objet.arrivee.y;
-            this.root.getChildren().remove(objet.cercle);
-            objet.cercle.setCenterX(objet.x+183);//réglage de la position, de la taille et de la couleur du cercle
-            objet.cercle.setCenterY(objet.y);
-            this.root.getChildren().add(objet.cercle);
-            this.root.getChildren().remove(objet.text);
-            objet.text.setX(objet.x+183);//réglage de la position, de la taille et de la couleur du text
-            objet.text.setY(objet.y);
-            this.root.getChildren().add(objet.text);
+            if (lambda<1 & lambda>0) {
+                objet.x = lambda * objet.depart.y + (1 - lambda) * objet.arrivee.x;
+                objet.y = lambda * objet.depart.x + (1 - lambda) * objet.arrivee.y;
+                this.root.getChildren().remove(objet.cercle);
+                objet.cercle.setCenterX(objet.x + 183);//réglage de la position, de la taille et de la couleur du cercle
+                objet.cercle.setCenterY(objet.y);
+                this.root.getChildren().add(objet.cercle);
+                this.root.getChildren().remove(objet.text);
+                objet.text.setX(objet.x + 183);//réglage de la position, de la taille et de la couleur du text
+                objet.text.setY(objet.y);
+                this.root.getChildren().add(objet.text);
+            }
         }
     }
     public void CanvasFunction(MouseEvent mouseEvent) {
