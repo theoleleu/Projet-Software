@@ -12,6 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import network.Node;
 
 import java.io.IOException;
 import java.util.*;
@@ -160,6 +161,37 @@ public class MenuController<E> {
     }
     public void createobjet(Double x,Double y,String nom,String donnees,String depart,String arrivee,Double vitesse) {//A modifier avec le corps de l'algo
         Circle cercle = new Circle();
+        boolean NodeDEPExist=false;
+        boolean NodeARRExist =false;
+        VectorNode departNode;
+        VectorNode arriveNode;
+        int j=0;
+        while ((!NodeDEPExist || !NodeARRExist )  && j<TableNode.size()){
+            if(!NodeDEPExist){
+                if(TableNode.get(j).nom.equals(depart)){
+                    NodeDEPExist = true;
+                    departNode = TableNode.get(j);
+                    x = departNode.x;
+                    y = departNode.y;
+                    System.out.println("le node de depart est : "+TableNode.get(j).nom);
+                }
+            }
+            if(!NodeARRExist){
+                if(TableNode.get(j).nom.equals(arrivee)){
+                    NodeARRExist = true;
+                    arriveNode = TableNode.get(j);
+                    System.out.println("le node d'arrive est : "+TableNode.get(j).nom);
+                }
+            }
+            j++;
+        }
+        if(!NodeARRExist){
+            System.out.println("le node d'arrive "+arrivee +" n'existe pas");
+
+        }
+        if(!NodeDEPExist){
+            System.out.println("le node de depart "+depart +" n'existe pas");
+        }
         cercle.setCenterX(x+183);
         cercle.setCenterY(y);
         cercle.setRadius(5);
@@ -169,7 +201,6 @@ public class MenuController<E> {
         text.setX(x+178);
         text.setY(y);
         text.setText(nom);
-
 
 
         //Création de l'espace de stockage des Objets
@@ -185,6 +216,7 @@ public class MenuController<E> {
             System.out.print("donnees = "+TableObject.get(i).donnee+" - ");
             System.out.print("vitesse = "+TableObject.get(i).vitesse+"\n");
         }
+
         this.root.getChildren().add(text);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
     }
