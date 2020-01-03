@@ -2,6 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ObjetController {
@@ -17,6 +18,9 @@ public class ObjetController {
     public javafx.scene.control.Label positionY;
     private double Vitesse;
     private String nom;
+    private String Depart;
+    private String Arrivee;
+    private String Donnees;
 
 
     public void setCoord(String x, String y){
@@ -31,7 +35,18 @@ public class ObjetController {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
-
+    public String getDonnees(){
+        return tfDonnees.getText();
+    }
+    public String getDepart(){
+        return tfArrivee.getText();
+    }
+    public String getArrivee(){
+        return tfDepart.getText();
+    }
+    public String getVitesse(){
+        return this.tfVitesse.getText();
+    }
     public void validerFen(ActionEvent actionEvent) {
         if(tfNom.getText().equals("") || tfDonnees.getText().equals("") || tfDepart.getText().equals("") || tfArrivee.getText().equals("") || tfVitesse.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -42,9 +57,13 @@ public class ObjetController {
         } else {
             try {
                 Integer.parseInt(tfVitesse.getText());
-                this.Vitesse=Double.parseDouble(tfVitesse.getText());
+
                 System.out.println(tfNom.getText());
                 this.nom=tfNom.getText();
+                this.Donnees=tfDonnees.getText();
+                this.Depart=tfDepart.getText();
+                this.Arrivee=tfArrivee.getText();
+                this.Vitesse=Double.parseDouble(tfVitesse.getText());
                 System.out.println(tfDonnees.getText());
                 System.out.println(tfDepart.getText());
                 System.out.println(tfArrivee.getText());

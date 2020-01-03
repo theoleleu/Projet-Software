@@ -145,6 +145,12 @@ public class MenuController<E> {
                     fils.setTitle("Création Objet");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
+                    //utiliser les fonctions
+                    objetController.getDonnees();
+                    objetController.getDepart();
+                    objetController.getArrivee();
+                    objetController.getVitesse();
+
                     this.createobjet(x,y,objetController.getname());
                 } catch (IOException e){
                     e.printStackTrace();
