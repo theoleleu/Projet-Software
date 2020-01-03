@@ -245,7 +245,7 @@ public class MenuController<E> {
         boolean ArcExist=false;
         int k=0;
         while (!ArcExist && k<TableArc.size()){
-            if(TableArc.get(k).depart.equals(depart)){
+            if(TableArc.get(k).depart.nom.equals(depart)){
                 ArcExist = true;
                 vectorArc = TableArc.get(k);
             }
