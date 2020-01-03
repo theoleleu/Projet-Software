@@ -187,8 +187,12 @@ public class MenuController<E> {
         line.setStartY(DY);
         line.setEndX(FX+183);
         line.setEndY(FY);
-        line.setStroke(Color.GREEN);
-        line.setStrokeWidth(4);
+        Random rand = new Random();
+        float r1 = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
+        line.setStroke(new Color(r1,g,b,1));
+        line.setStrokeWidth(6);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
         //Création de l'espace de stockage des Arcs
