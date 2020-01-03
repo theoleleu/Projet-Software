@@ -29,8 +29,8 @@ public class MenuController<E> {
 
     public javafx.scene.control.Button btnQuitter;
     public javafx.scene.canvas.Canvas Canvas;
-    private ArrayList<ArrayList<Double>> Arcs;
-    private ArrayList<ArrayList<Double>> Noeuds;
+    private ArrayList<ArrayList<String>> Arcs;
+    private ArrayList<ArrayList<String>> Noeuds;
     private ArrayList<ArrayList<Double>> Objets;
     private Group root;
 
