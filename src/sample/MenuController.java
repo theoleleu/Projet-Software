@@ -39,7 +39,15 @@ class VectorObject
         Text text;
         Double x;
         Double y;
-    };
+    }
+class VectorArc
+{
+
+}
+class VectorNode
+{
+
+}
 public class MenuController<E> {
 
     private ArrayList<VectorObject> TableObject = new ArrayList<VectorObject>(13);
@@ -53,15 +61,10 @@ public class MenuController<E> {
 
     public javafx.scene.control.Button btnQuitter;
     public javafx.scene.canvas.Canvas Canvas;
-    private ArrayList<ArrayList<String>> Arcs;
-    private ArrayList<ArrayList<String>> Noeuds;
-    private ArrayList<ArrayList<Double>> Objets;
+
     private Group root;
 
     public MenuController(){
-        this.Arcs=new ArrayList<>();
-        this.Objets=new ArrayList<>();
-        this.Noeuds=new ArrayList<>();
         this.temps=0.0;
     }
 
