@@ -20,13 +20,19 @@ public class ArcController {
     private String nom;
     private String debut;
     private String fin;
+    private boolean valide;
 
-
+    public ArcController(){
+        this.valide=false;
+    }
     public void setCoord(String x, String y){
         positionX.setText(x);
         positionY.setText(y);
     }
 
+    public boolean isvalide(){
+        return this.valide;
+    }
 
     public void closeFen(ActionEvent actionEvent) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -69,6 +75,7 @@ public class ArcController {
                 }
                 Stage stage = (Stage) validerButton.getScene().getWindow();
                 stage.close();
+                this.valide=true;
             } catch (java.lang.RuntimeException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Création Arc");

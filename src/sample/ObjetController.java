@@ -21,11 +21,17 @@ public class ObjetController {
     private String Depart;
     private String Arrivee;
     private String Donnees;
-
+    private boolean valide;
+    public ObjetController(){
+        this.valide=false;
+    }
 
     public void setCoord(String x, String y){
         positionX.setText(x);
         positionY.setText(y);
+    }
+    public boolean isvalide(){
+        return this.valide;
     }
 
     public String getname(){
@@ -70,6 +76,7 @@ public class ObjetController {
                 System.out.println(tfVitesse.getText());
                 Stage stage = (Stage) btnValider.getScene().getWindow();
                 stage.close();
+                this.valide=true;
             } catch (java.lang.RuntimeException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Création Objet");

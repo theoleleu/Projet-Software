@@ -210,19 +210,19 @@ public class MenuController<E> {
                     Parent p = loader.load();
                     ArcController arcController = loader.getController();
                     arcController.setCoord("X : "+Double.toString(x),"Y : "+Double.toString(y));
-
-
-                    // Utiliser les fonctions extraites de l'interface
-                    arcController.getnom();
-                    arcController.getcapacity();
-                    arcController.getdebut();
-                    arcController.getfin();
-
                     Stage fils = new Stage();
                     fils.setTitle("Création Arc");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
-                    this.createarc(arcController.getnom(),arcController.getcapacity(), arcController.getdebut(),arcController.getfin());
+
+                    if (arcController.isvalide()) {
+                        // Utiliser les fonctions extraites de l'interface
+                        arcController.getnom();
+                        arcController.getcapacity();
+                        arcController.getdebut();
+                        arcController.getfin();
+                        this.createarc(arcController.getnom(), arcController.getcapacity(), arcController.getdebut(), arcController.getfin());
+                    }
                 } catch (IOException e){
                     e.printStackTrace();
                 } catch (NullPointerException e){
@@ -238,12 +238,13 @@ public class MenuController<E> {
                     fils.setTitle("Création Noeud");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
+                    if (nodeController.isvalide()) {
+                        //Utiliser les fonctions extraites de l'interface
+                        nodeController.getname();
+                        nodeController.getcapacite();
 
-                    //Utiliser les fonctions extraites de l'interface
-                    nodeController.getname();
-                    nodeController.getcapacite();
-
-                    this.createNode(x,y, (double) nodeController.getcapacite(),nodeController.getname());
+                        this.createNode(x, y, (double) nodeController.getcapacite(), nodeController.getname());
+                    }
                 } catch (IOException e){
                     e.printStackTrace();
                 } catch (NullPointerException e){
@@ -259,16 +260,16 @@ public class MenuController<E> {
                     fils.setTitle("Création Objet");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
+                    if (objetController.isvalide()) {
+                        //utiliser les fonctions
+                        objetController.getname();
+                        objetController.getDonnees();
+                        objetController.getDepart();
+                        objetController.getArrivee();
+                        objetController.getVitesse();
 
-                    //utiliser les fonctions
-                    objetController.getname();
-                    objetController.getDonnees();
-                    objetController.getDepart();
-                    objetController.getArrivee();
-                    objetController.getVitesse();
-
-                    this.createobjet(x,y,objetController.getname(),objetController.getDonnees(),objetController.getDepart(),objetController.getArrivee(),objetController.getVitesse());
-                } catch (IOException e){
+                        this.createobjet(x, y, objetController.getname(), objetController.getDonnees(), objetController.getDepart(), objetController.getArrivee(), objetController.getVitesse());
+                    }} catch (IOException e){
                     e.printStackTrace();
                 } catch (NullPointerException e){
                     e.printStackTrace();

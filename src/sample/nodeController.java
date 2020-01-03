@@ -14,12 +14,18 @@ public class nodeController {
     public javafx.scene.control.Label positionY;
     double capacite;
     private String nom;
+    private boolean valide;
 
+    public nodeController(){
+        this.valide=false;
+    }
     public void setCoord(String x, String y){
         positionX.setText(x);
         positionY.setText(y);
     }
-
+    public boolean isvalide(){
+        return this.valide;
+    }
 
     public void closeFen(ActionEvent actionEvent) {
     Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -44,6 +50,7 @@ public class nodeController {
                 this.capacite=capacity;
                 Stage stage = (Stage) validateButton.getScene().getWindow();
                 stage.close();
+                this.valide=true;
             } catch (java.lang.RuntimeException e) {
                 capacityWarning.setText("Attention : la capacité doit être un entier");
             }
