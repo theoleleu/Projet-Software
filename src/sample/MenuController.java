@@ -188,7 +188,7 @@ public class MenuController<E> {
         line.setEndX(FX+183);
         line.setEndY(FY);
         line.setStroke(Color.GREEN);
-        line.setStrokeWidth(2);
+        line.setStrokeWidth(4);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
 
         //Création de l'espace de stockage des Arcs
