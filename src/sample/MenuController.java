@@ -299,8 +299,14 @@ public class MenuController<E> {
             Double lambda=objet.vitesse*(this.temps-objet.t0)/objet.arc.longueur;
             objet.x=lambda*objet.depart.y+(1-lambda)*objet.arrivee.x;
             objet.y=lambda*objet.depart.x+(1-lambda)*objet.arrivee.y;
+            this.root.getChildren().remove(objet.cercle);
             objet.cercle.setCenterX(objet.x+183);//réglage de la position, de la taille et de la couleur du cercle
             objet.cercle.setCenterY(objet.y);
+            this.root.getChildren().add(objet.cercle);
+            this.root.getChildren().remove(objet.text);
+            objet.text.setX(objet.x+183);//réglage de la position, de la taille et de la couleur du text
+            objet.text.setY(objet.y);
+            this.root.getChildren().add(objet.text);
         }
     }
     public void CanvasFunction(MouseEvent mouseEvent) {
@@ -382,7 +388,7 @@ public class MenuController<E> {
             }
         } else if (radioSupprimer.isSelected()){
             if(radioArc.isSelected()){
-
+                //this.root.getChildren().remove(line);
             } else if (radioNoeud.isSelected()){
 
             } else if (radioObjet.isSelected()){
