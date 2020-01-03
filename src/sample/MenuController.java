@@ -21,10 +21,8 @@ class VectorObject
     {
 
 
-        private Integer id;
 
-        public VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text,VectorArc arc, Double t0, Integer id) {
-            this.id=id;
+        public VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text,VectorArc arc, Double t0) {
             this.cercle = cercle;
             this.nom = nom;
             this.x = x;
@@ -50,14 +48,12 @@ class VectorObject
     }
 class VectorArc
 {
-    private Integer id;
     Line line;
     String nom;
     Integer capacite;
     String depart;
     String arrivee;
-    public VectorArc(Line line,String nom,Integer capacite,String depart,String arrivee,Integer id){
-        this.id=id;
+    public VectorArc(Line line,String nom,Integer capacite,String depart,String arrivee){
         this.line = line;
         this.nom = nom;
         this.depart = depart;
@@ -74,8 +70,8 @@ class VectorNode
     Double x;
     Double y;
     Integer id;
-    public VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x,Double y,Integer id)
-    {   this.id=id;
+    public VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x,Double y)
+    {
         this.cercle = cercle;
         this.nom = nom;
         this.text = text;
@@ -88,9 +84,7 @@ class VectorNode
 }
 public class MenuController<E> {
 
-    private int idarc;
-    private int idobjet;
-    private int idnode;
+
     private ArrayList<VectorObject> TableObject = new ArrayList<VectorObject>(13);
     private ArrayList<VectorArc> TableArc = new ArrayList<VectorArc>(13);
     private ArrayList<VectorNode> TableNode = new ArrayList<VectorNode>(13);
@@ -109,9 +103,6 @@ public class MenuController<E> {
 
     public MenuController(){
         this.temps=0.0;
-        this.idarc=0;
-        this.idnode=0;
-        this.idobjet=0;
     }
 
 
@@ -140,8 +131,7 @@ public class MenuController<E> {
 
         //Création de l'espace de stockage des Noeuds
 
-        VectorNode element = new VectorNode(cercle,text,nom,capacite,x,y,this.idnode);
-        this.idnode++;
+        VectorNode element = new VectorNode(cercle,text,nom,capacite,x,y);
         TableNode.add(element);
         System.out.println(Arrays.toString(TableNode.toArray()));
         for(int i = 0; i < TableNode.size(); i++) {
@@ -166,8 +156,7 @@ public class MenuController<E> {
 
 
         //Création de l'espace de stockage des Arcs
-        VectorArc element = new VectorArc(line,nom,capacite,depart,arrivee,this.idarc);
-        this.idarc++;
+        VectorArc element = new VectorArc(line,nom,capacite,depart,arrivee);
         TableArc.add(element);
         System.out.println(Arrays.toString(TableArc.toArray()));
         for(int i = 0; i < TableArc.size(); i++) {
@@ -243,8 +232,7 @@ public class MenuController<E> {
 
 
         //Création de l'espace de stockage des Objets
-        VectorObject element = new VectorObject(cercle,x,y,nom,donnees,departNode,arriveNode,vitesse,text,vectorArc,this.temps,this.idobjet);
-        this.idobjet++;
+        VectorObject element = new VectorObject(cercle,x,y,nom,donnees,departNode,arriveNode,vitesse,text,vectorArc,this.temps);
         TableObject.add(element);
         System.out.println(Arrays.toString(TableObject.toArray()));
         for(int i = 0; i < TableObject.size(); i++) {
