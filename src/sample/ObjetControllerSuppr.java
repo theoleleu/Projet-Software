@@ -39,7 +39,6 @@ public class ObjetControllerSuppr {
                 System.out.println(tfNom.getText());
                 this.nom=tfNom.getText();
 
-                System.out.println(tfNom.getText());
                 Stage stage = (Stage) btnValider.getScene().getWindow();
                 stage.close();
                 this.valide=true;

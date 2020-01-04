@@ -14,18 +14,13 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
         Parent root = (Parent)loader.load();
 
-        Group root2= new Group(root);
+
         MenuController controller = (MenuController)loader.getController();
+        Group root2= new Group(root);
         controller.setRoot(root2);
 
         primaryStage.setTitle("Création réseau");
         primaryStage.setScene(new Scene(root2, 1000, 600));
-
-
-
-
-
-
         primaryStage.show();
     }
 

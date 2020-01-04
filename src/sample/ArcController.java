@@ -23,6 +23,7 @@ public class ArcController {
     private String fin;
     private boolean valide;
     private double longueur;
+    private boolean doublesens;
 
     public ArcController(){
         this.valide=false;
@@ -35,7 +36,9 @@ public class ArcController {
     public boolean isvalide(){
         return this.valide;
     }
-
+    public boolean isdoublesens(){
+        return this.doublesens;
+    }
     public void closeFen(ActionEvent actionEvent) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -74,9 +77,12 @@ public class ArcController {
                 this.debut=DebutArc.getText();
                 System.out.println(FinArc.getText());
                 this.fin=FinArc.getText();
+
                 if(DoubleSens.isSelected()){
+                    this.doublesens=true;
                     System.out.println("Double sens : Activé");
                 } else {
+                    this.doublesens=false;
                     System.out.println("Double sens : Désactivé");
                 }
                 Stage stage = (Stage) validerButton.getScene().getWindow();

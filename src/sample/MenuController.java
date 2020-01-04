@@ -29,7 +29,7 @@ class VectorObject
         Double x;
         Double y;
         VectorArc arc;
-        public VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text,VectorArc arc, Double t0) {
+        VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text, VectorArc arc, Double t0) {
             this.t0=t0;
             this.cercle = cercle;
             this.nom = nom;
@@ -46,6 +46,7 @@ class VectorObject
     }
 class VectorArc
 {
+    Boolean doublesens;
     Double longueur;
     Line line;
     Text text;
@@ -53,7 +54,7 @@ class VectorArc
     Integer capacite;
     VectorNode depart;
     VectorNode arrivee;
-    public VectorArc(Line line,Text text,String nom,Integer capacite,VectorNode depart,VectorNode arrivee,Double longueur){
+    VectorArc(Line line, Text text, String nom, Integer capacite, VectorNode depart, VectorNode arrivee, Double longueur, Boolean doublesens){
         this.text=text;
         this.line = line;
         this.nom = nom;
@@ -61,6 +62,7 @@ class VectorArc
         this.depart = depart;
         this.arrivee = arrivee;
         this.capacite = capacite;
+        this.doublesens=doublesens;
     }
 
 }
@@ -71,7 +73,7 @@ class VectorNode
     Double capacite;
     Double x;
     Double y;
-    public VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x,Double y)
+    VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x, Double y)
     {
         this.cercle = cercle;
         this.nom = nom;
@@ -83,15 +85,15 @@ class VectorNode
     }
 
 }
-public class MenuController<E> {
+public class MenuController {
 
 
-    private ArrayList<VectorObject> TableObject = new ArrayList<VectorObject>(13);
-    private ArrayList<VectorArc> TableArc = new ArrayList<VectorArc>(13);
-    private ArrayList<VectorNode> TableNode = new ArrayList<VectorNode>(13);
-    private ArrayList<VectorO> TableO = new ArrayList<VectorO>(13);
-    private ArrayList<VectorA> TableA = new ArrayList<VectorA>(13);
-    private ArrayList<VectorN> TableN = new ArrayList<VectorN>(13);
+    private ArrayList<VectorObject> TableObject = new ArrayList<>(13);
+    private ArrayList<VectorArc> TableArc = new ArrayList<>(13);
+    private ArrayList<VectorNode> TableNode = new ArrayList<>(13);
+    private ArrayList<VectorO> TableO = new ArrayList<>(13);
+    private ArrayList<VectorA> TableA = new ArrayList<>(13);
+    private ArrayList<VectorN> TableN = new ArrayList<>(13);
     private double temps;
     public javafx.scene.control.RadioButton radioNoeud;
     public javafx.scene.control.RadioButton radioArc;
@@ -142,7 +144,7 @@ public class MenuController<E> {
         }
     }
 
-    private void affarc(Line line,Text text, String nom, Integer capacite, VectorNode departNode, VectorNode arriveNode, Double longueur) {
+    private void affarc(Line line,Text text, String nom, Integer capacite, VectorNode departNode, VectorNode arriveNode, Double longueur,Boolean doublesens) {
         Double DX = departNode.x;
         Double DY = departNode.y;
         Double FX = arriveNode.x;
@@ -163,7 +165,7 @@ public class MenuController<E> {
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
         this.root.getChildren().add(text);
         //Création de l'espace de stockage des Arcs
-        VectorArc element = new VectorArc(line, text, nom, capacite, departNode, arriveNode, longueur);
+        VectorArc element = new VectorArc(line, text, nom, capacite, departNode, arriveNode, longueur, doublesens);
         TableArc.add(element);
         System.out.println(Arrays.toString(TableArc.toArray()));
         for (VectorArc vectorArc : TableArc) {
@@ -210,7 +212,7 @@ public class MenuController<E> {
         VectorN elem = new VectorN(nom, capacite, x, y);
         TableN.add(elem);
     }
-    private void createarc(String nom, Integer capacite, String depart, String arrivee, Double longueur) {//A modifier avec le corps de l'algo
+    private void createarc(String nom, Integer capacite, String depart, String arrivee, Double longueur,Boolean doublesens) {//A modifier avec le corps de l'algo
 
         boolean NodeDEPExist = false;
         boolean NodeARRExist = false;
@@ -249,9 +251,9 @@ public class MenuController<E> {
         }
         Line line = new Line();
         Text text = new Text();
-        affarc(line, text, nom, capacite, departNode, arriveNode, longueur);
+        affarc(line, text, nom, capacite, departNode, arriveNode, longueur, doublesens);
         //Création de l'espace de stockage des Arcs
-        VectorA elem = new VectorA(nom, capacite, departN.nom, arriveN.nom, longueur);
+        VectorA elem = new VectorA(nom, capacite, departN.nom, arriveN.nom, longueur,doublesens);
         TableA.add(elem);
     }
 
@@ -300,7 +302,12 @@ public class MenuController<E> {
         boolean ArcExist = false;
         int k = 0;
         while (!ArcExist && k < TableArc.size()) {
-            if (TableArc.get(k).depart.nom.equals(depart)) {
+            if (TableArc.get(k).depart.nom.equals(depart) && TableArc.get(k).arrivee.nom.equals(arrivee)) {
+                ArcExist = true;
+                vectorArc = TableArc.get(k);
+                vectorA = TableA.get(k);
+            }
+            if (TableArc.get(k).doublesens && TableArc.get(k).depart.nom.equals(arrivee) && TableArc.get(k).arrivee.nom.equals(depart)) {
                 ArcExist = true;
                 vectorArc = TableArc.get(k);
                 vectorA = TableA.get(k);
@@ -322,19 +329,47 @@ public class MenuController<E> {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
-    public void avancer(){
-        this.temps+=1;
-        for (VectorObject objet : TableObject){
+    public void avancer() {
+        this.temps++;
+        for (int i=0;i<TableObject.size();i++){
+            VectorObject objet=TableObject.get(i);
+            VectorO o=TableO.get(i);
             Double lambda=objet.vitesse*(this.temps-objet.t0)/(objet.arc.longueur);
-            if (lambda<1 & lambda>0) {
+            Double l=objet.vitesse*(this.temps-1-objet.t0)/(objet.arc.longueur);
+            if (l>=1){
+                this.root.getChildren().remove(objet.cercle);
+                this.root.getChildren().remove(objet.text);
+                TableObject.remove(objet);
+                TableO.remove(o);
+                i--;
+            }
+            else{
+            if (lambda<1 & lambda>=0) {
                 objet.x = (1 - lambda) * objet.depart.x + lambda * objet.arrivee.x;
                 objet.y = (1 - lambda) * objet.depart.y + lambda * objet.arrivee.y;
-
             }
             else {
                 objet.x = objet.arrivee.x;
                 objet.y = objet.arrivee.y;
+                try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
+                Parent p = loader.load();
+
+                MessageController MessageController = loader.getController();
+                Group root2 = new Group(p);
+                MessageController.setRoot(root2);
+                Stage fils = new Stage();
+                fils.setTitle("Message");
+                fils.setScene(new Scene(root2, 300, 100));
+                fils.show();
+                MessageController.messsage(objet.donnee,objet.depart.nom,objet.arrivee.nom);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            o.x=objet.x;
+            o.y=objet.y;
             this.root.getChildren().remove(objet.cercle);
             objet.cercle.setCenterX(objet.x + 183);//réglage de la position, de la taille et de la couleur du cercle
             objet.cercle.setCenterY(objet.y);
@@ -343,6 +378,7 @@ public class MenuController<E> {
             objet.text.setX(objet.x + 183);//réglage de la position, de la taille et de la couleur du text
             objet.text.setY(objet.y);
             this.root.getChildren().add(objet.text);
+            }
         }
 
     }
@@ -368,7 +404,7 @@ public class MenuController<E> {
                         arcController.getcapacity();
                         arcController.getdebut();
                         arcController.getfin();
-                        this.createarc(arcController.getnom(), arcController.getcapacity(), arcController.getdebut(), arcController.getfin(),arcController.getlongueur());
+                        this.createarc(arcController.getnom(), arcController.getcapacity(), arcController.getdebut(), arcController.getfin(),arcController.getlongueur(),arcController.isdoublesens());
                     }
                 } catch (IOException | NullPointerException e){
                     e.printStackTrace();
@@ -404,12 +440,6 @@ public class MenuController<E> {
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
                     if (objetController.isvalide()) {
-                        //utiliser les fonctions
-                        objetController.getname();
-                        objetController.getDonnees();
-                        objetController.getDepart();
-                        objetController.getArrivee();
-                        objetController.getVitesse();
 
                         this.createobjet(x, y, objetController.getname(), objetController.getDonnees(), objetController.getDepart(), objetController.getArrivee(), objetController.getVitesse());
                     }} catch (IOException | NullPointerException e){
@@ -543,7 +573,7 @@ public class MenuController<E> {
             }
             assert arriveNode != null;
             assert departNode != null;
-            affarc(line,text, arc.nom, arc.capacite, departNode, arriveNode, arc.longueur);
+            affarc(line,text, arc.nom, arc.capacite, departNode, arriveNode, arc.longueur, arc.doublesens);
         }
         for (VectorO objet : TableO) {
             Circle cercle = new Circle();
@@ -584,7 +614,7 @@ class VectorO implements Serializable
     Double x;
     Double y;
     String arc;
-    public VectorO(Double x, Double y, String nom, String donnee, String depart, String arrivee, Double vitesse, String arc, Double t0) {
+    VectorO(Double x, Double y, String nom, String donnee, String depart, String arrivee, Double vitesse, String arc, Double t0) {
         this.t0=t0;
         this.nom = nom;
         this.x = x;
@@ -604,12 +634,14 @@ class VectorA implements Serializable
     Integer capacite;
     String depart;
     String arrivee;
-    public VectorA(String nom,Integer capacite,String depart,String arrivee,Double longueur){
+    Boolean doublesens;
+    VectorA(String nom, Integer capacite, String depart, String arrivee, Double longueur, Boolean doublesens){
         this.nom = nom;
         this.longueur=longueur;
         this.depart = depart;
         this.arrivee = arrivee;
         this.capacite = capacite;
+        this.doublesens=doublesens;
     }
 
 }
@@ -619,7 +651,7 @@ class VectorN implements Serializable
     Double capacite;
     Double x;
     Double y;
-    public VectorN(String nom, Double capacite, Double x,Double y)
+    VectorN(String nom, Double capacite, Double x, Double y)
     {
         this.nom = nom;
         this.x = x;
