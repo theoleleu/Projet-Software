@@ -48,11 +48,13 @@ class VectorArc
 {
     Double longueur;
     Line line;
+    Text text;
     String nom;
     Integer capacite;
     VectorNode depart;
     VectorNode arrivee;
-    public VectorArc(Line line,String nom,Integer capacite,VectorNode depart,VectorNode arrivee,Double longueur){
+    public VectorArc(Line line,Text text,String nom,Integer capacite,VectorNode depart,VectorNode arrivee,Double longueur){
+        this.text=text;
         this.line = line;
         this.nom = nom;
         this.longueur=longueur;
@@ -118,7 +120,7 @@ public class MenuController<E> {
         cercle.setCenterY(y);
         cercle.setRadius(capacite);
         text.setX(x + 178);
-        text.setY(y + 2);
+        text.setY(y + 25);
         text.setText(nom);
         Random rand = new Random();
         float r1 = rand.nextFloat();
@@ -140,7 +142,7 @@ public class MenuController<E> {
         }
     }
 
-    private void affarc(Line line, String nom, Integer capacite, VectorNode departNode, VectorNode arriveNode, Double longueur) {
+    private void affarc(Line line,Text text, String nom, Integer capacite, VectorNode departNode, VectorNode arriveNode, Double longueur) {
         Double DX = departNode.x;
         Double DY = departNode.y;
         Double FX = arriveNode.x;
@@ -149,6 +151,9 @@ public class MenuController<E> {
         line.setStartY(DY);
         line.setEndX(FX + 183);
         line.setEndY(FY);
+        text.setX(183+(DX+FX)/2);
+        text.setY((DY+FY)/2-2);
+        text.setText(nom);
         Random rand = new Random();
         float r1 = rand.nextFloat();
         float g = rand.nextFloat();
@@ -156,9 +161,9 @@ public class MenuController<E> {
         line.setStroke(new Color(r1, g, b, 1));
         line.setStrokeWidth(6);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
-
+        this.root.getChildren().add(text);
         //Création de l'espace de stockage des Arcs
-        VectorArc element = new VectorArc(line, nom, capacite, departNode, arriveNode, longueur);
+        VectorArc element = new VectorArc(line, text, nom, capacite, departNode, arriveNode, longueur);
         TableArc.add(element);
         System.out.println(Arrays.toString(TableArc.toArray()));
         for (VectorArc vectorArc : TableArc) {
@@ -177,8 +182,8 @@ public class MenuController<E> {
         cercle.setRadius(5);
         cercle.setFill(Color.BLACK);
         this.root.getChildren().add(cercle);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
-        text.setX(x + 178);
-        text.setY(y);
+        text.setX(x + 168);
+        text.setY(y-5);
         text.setText(nom);
         //Création de l'espace de stockage des Objets
         VectorObject element = new VectorObject(cercle, x, y, nom, donnees, departNode, arriveNode, vitesse, text, vectorArc, this.temps);
@@ -243,7 +248,8 @@ public class MenuController<E> {
             System.exit(1);
         }
         Line line = new Line();
-        affarc(line, nom, capacite, departNode, arriveNode, longueur);
+        Text text = new Text();
+        affarc(line, text, nom, capacite, departNode, arriveNode, longueur);
         //Création de l'espace de stockage des Arcs
         VectorA elem = new VectorA(nom, capacite, departN.nom, arriveN.nom, longueur);
         TableA.add(elem);
@@ -522,6 +528,7 @@ public class MenuController<E> {
         }
         for (VectorA arc : TableA) {
             Line line = new Line();
+            Text text = new Text();
             VectorNode departNode = null;
             VectorNode arriveNode = null;
             int j = 0;
@@ -536,7 +543,7 @@ public class MenuController<E> {
             }
             assert arriveNode != null;
             assert departNode != null;
-            affarc(line, arc.nom, arc.capacite, departNode, arriveNode, arc.longueur);
+            affarc(line,text, arc.nom, arc.capacite, departNode, arriveNode, arc.longueur);
         }
         for (VectorO objet : TableO) {
             Circle cercle = new Circle();
