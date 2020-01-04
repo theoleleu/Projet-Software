@@ -191,7 +191,8 @@ public class MenuController {
             System.out.print("Noeud de départ = " + vectorArc.depart.nom + " - ");
             System.out.print("Noeud d'arrivée = " + vectorArc.arrivee.nom + " - ");
             System.out.print("Longueur = " + vectorArc.longueur + " - ");
-            System.out.print("Capacite = " + vectorArc.capacite + "\n");
+            System.out.print("Capacite = " + vectorArc.capacite + " - ");
+            System.out.print("doublesens = " + vectorArc.doublesens + "\n");
         }
     }
 
