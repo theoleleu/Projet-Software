@@ -596,10 +596,9 @@ public class MenuController {
                 if (TableArc.get(i).nom.equals(objet.arc)) {
                     arc = TableArc.get(i);
                 }
-                affobjet(cercle, text, objet.x, objet.y, objet.nom, objet.donnee, depart, arrivee, objet.vitesse, arc);
+                i++;
             }
-
-            //
+            affobjet(cercle, text, objet.x, objet.y, objet.nom, objet.donnee, depart, arrivee, objet.vitesse, arc);
         }
     }
 
