@@ -7,24 +7,25 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextField?>
 <Pane fx:controller="sample.ArcController"
-      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label fx:id="positionX" layoutX="320.0" layoutY="28.0" text="" visible="true"/>
-        <Label fx:id="positionY" layoutX="320.0" layoutY="64.0" text="" visible="true"/>
-        <Button fx:id="validerButton" layoutX="10.0" layoutY="199.0" mnemonicParsing="false" text="Valider" onAction="#validerFen"/>
-        <CheckBox fx:id="DoubleSens" layoutX="80.0" layoutY="166.0" mnemonicParsing="false" text="Double Sens" />
-        <Button fx:id="closeButton" layoutX="88.0" layoutY="199.0" mnemonicParsing="false" text="Quitter" onAction="#closeFen"/>
-        <Label layoutX="10.0" layoutY="15.0" text="Nom :" />
-        <Label layoutX="10.0" layoutY="45.0" text="Capacité :" />
-        <Label layoutX="10.0" layoutY="75.0" text="Longueur :" />
-        <Label layoutX="10.0" layoutY="105.0" text="Début :" />
-        <Label layoutX="10.0" layoutY="135.0" text="Fin :" />
-        <Label fx:id="Erreur" layoutX="20.0" layoutY="125.0" text="" />
-        <TextField fx:id="NameArc" layoutX="81.0" layoutY="15.0" />
-        <TextField fx:id="LongueurArc" layoutX="81.0" layoutY="75.0" />
-        <TextField fx:id="CapacityArc" layoutX="81.0" layoutY="45.0" />
-        <TextField fx:id="DebutArc" layoutX="81.0" layoutY="105.0" />
-        <TextField fx:id="FinArc" layoutX="81.0" layoutY="135.0" />
+      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0"
+      prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="positionX" layoutX="320.0" layoutY="28.0"/>
+    <Label fx:id="positionY" layoutX="320.0" layoutY="64.0"/>
+    <Button fx:id="validerButton" layoutX="10.0" layoutY="199.0" mnemonicParsing="false" text="Valider"
+            onAction="#validerFen"/>
+    <CheckBox fx:id="DoubleSens" layoutX="80.0" layoutY="166.0" mnemonicParsing="false" text="Double Sens"/>
+    <Button fx:id="closeButton" layoutX="88.0" layoutY="199.0" mnemonicParsing="false" text="Quitter"
+            onAction="#closeFen"/>
+    <Label layoutX="10.0" layoutY="15.0" text="Nom :"/>
+    <Label layoutX="10.0" layoutY="45.0" text="Capacité :"/>
+    <Label layoutX="10.0" layoutY="75.0" text="Longueur :"/>
+    <Label layoutX="10.0" layoutY="105.0" text="Début :"/>
+    <Label layoutX="10.0" layoutY="135.0" text="Fin :"/>
+    <Label fx:id="Erreur" layoutX="20.0" layoutY="125.0"/>
+    <TextField fx:id="NameArc" layoutX="81.0" layoutY="15.0"/>
+    <TextField fx:id="LongueurArc" layoutX="81.0" layoutY="75.0"/>
+    <TextField fx:id="CapacityArc" layoutX="81.0" layoutY="45.0"/>
+    <TextField fx:id="DebutArc" layoutX="81.0" layoutY="105.0"/>
+    <TextField fx:id="FinArc" layoutX="81.0" layoutY="135.0"/>
 
-    </children>
 </Pane>

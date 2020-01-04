@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
@@ -28,37 +27,37 @@ public class ArcController {
     public ArcController(){
         this.valide=false;
     }
-    public void setCoord(String x, String y){
+    void setCoord(String x, String y){
         positionX.setText(x);
         positionY.setText(y);
     }
 
-    public boolean isvalide(){
+    boolean isvalide(){
         return this.valide;
     }
-    public boolean isdoublesens(){
+    boolean isdoublesens(){
         return this.doublesens;
     }
-    public void closeFen(ActionEvent actionEvent) {
+    public void closeFen() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
-    public int getcapacity(){
+    int getcapacity(){
     return this.capacity;
     }
-    public String getnom(){
+    String getnom(){
         return this.nom;
     }
-    public String getdebut(){
+    String getdebut(){
         return this.debut;
     }
-    public String getfin(){
+    String getfin(){
         return this.fin;
     }
-    public Double getlongueur(){
+    Double getlongueur(){
         return this.longueur;
     }
-    public void validerFen(ActionEvent actionEvent) {
+    public void validerFen() {//ActionEvent actionEvent
         if(NameArc.getText().equals("") || CapacityArc.equals("")){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Test Création Arc");
@@ -73,11 +72,7 @@ public class ArcController {
                 this.debut=DebutArc.getText();
                 this.fin=FinArc.getText();
 
-                if(DoubleSens.isSelected()){
-                    this.doublesens=true;
-                } else {
-                    this.doublesens=false;
-                }
+                this.doublesens= DoubleSens.isSelected();
                 Stage stage = (Stage) validerButton.getScene().getWindow();
                 stage.close();
                 this.valide=true;

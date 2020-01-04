@@ -2,22 +2,14 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-
-
-
-
 
 public class MessageController {
 
     @FXML
     private Group root;
-
 
     public javafx.scene.control.Button btnValider;
     /*public javafx.scene.control.Button btnQuitter;
@@ -25,14 +17,12 @@ public class MessageController {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }*/
-
     public void validerFen() {
                 Stage stage = (Stage) btnValider.getScene().getWindow();
                 stage.close();
     }
 
-
-    public void messsage(String M,String entete){
+    void messsage(String M,String entete){
         Text nom = new Text();
         nom.setX(10);
         nom.setY(24);
@@ -47,7 +37,7 @@ public class MessageController {
         this.root.getChildren().add(text);
     }
 
-    public void setRoot(Group root) {
+    void setRoot(Group root) {
         this.root=root;
     }
 }

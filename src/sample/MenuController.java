@@ -273,7 +273,7 @@ public class MenuController {
         }
         boolean ArcExist = false;
         j = 0;
-        while ((!ArcExist ) && j < TableNode.size()) {
+        while ((!ArcExist ) && j < TableArc.size()) {
             if (TableArc.get(j).nom.equals(nom)) {
                 ArcExist = true;
             }
@@ -344,7 +344,7 @@ public class MenuController {
         }
         boolean ObjectExist = false;
         j = 0;
-        while ((!ObjectExist ) && j < TableNode.size()) {
+        while ((!ObjectExist ) && j < TableObject.size()) {
             if (TableObject.get(j).nom.equals(nom)) {
                 ObjectExist = true;
             }
@@ -357,7 +357,7 @@ public class MenuController {
             message("Le noeud de " + depart + " n'existe pas.","Merci de choisir un noeud de départ valide !");
         }
         else if (!NodeARRExist) {
-            message("Le noeud d'arrive " + arrivee + " n'existe pas.","Merci de choisir un noeud d'arrivée valide !");
+            message("Le noeud d'arrivée " + arrivee + " n'existe pas.","Merci de choisir un noeud d'arrivée valide !");
         } else if (!ArcExist) {
             message("L'arc entre les Noeuds "+ depart +" et "+ arrivee + " n'existe pas.","Merci de choisir des Noeuds reliés par un arc !");
         }

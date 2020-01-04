@@ -1,7 +1,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.Button?>
-<Pane fx:controller="sample.MessageController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Button fx:id="btnValider" layoutX="24.0" layoutY="58.0" mnemonicParsing="false" text="OK" onAction="#validerFen"/>
-    </children>
+<Pane fx:controller="sample.MessageController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1">
+    <Button fx:id="btnValider" layoutX="24.0" layoutY="58.0" mnemonicParsing="false" text="OK" onAction="#validerFen"/>
 </Pane>

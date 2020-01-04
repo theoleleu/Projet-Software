@@ -1,8 +1,6 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ObjetController {
@@ -26,34 +24,34 @@ public class ObjetController {
         this.valide=false;
     }
 
-    public void setCoord(String x, String y){
+    void setCoord(String x, String y){
         positionX.setText(x);
         positionY.setText(y);
     }
-    public boolean isvalide(){
+    boolean isvalide(){
         return this.valide;
     }
 
-    public String getname(){
+    String getname(){
         return this.nom;
     }
-    public void quitFen(ActionEvent actionEvent) {
+    public void quitFen() {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
-    public String getDonnees(){
+    String getDonnees(){
         return this.Donnees;
     }
-    public String getDepart(){
+    String getDepart(){
         return this.Depart;
     }
-    public String getArrivee(){
+    String getArrivee(){
         return this.Arrivee;
     }
-    public Double getVitesse(){
+    Double getVitesse(){
         return this.Vitesse;
     }
-    public void validerFen(ActionEvent actionEvent) {
+    public void validerFen() {//ActionEvent actionEvent
         if(tfNom.getText().equals("") || tfDonnees.getText().equals("") || tfDepart.getText().equals("") || tfArrivee.getText().equals("") || tfVitesse.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Test Création Objet");
