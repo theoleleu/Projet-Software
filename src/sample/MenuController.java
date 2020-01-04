@@ -359,7 +359,7 @@ public class MenuController {
                 Group root2 = new Group(p);
                 MessageController.setRoot(root2);
                 Stage fils = new Stage();
-                fils.setTitle("Message");
+                fils.setTitle("Objet Arrivé");
                 fils.setScene(new Scene(root2, 300, 100));
                 fils.show();
                 MessageController.messsage(objet.donnee,objet.depart.nom,objet.arrivee.nom);
