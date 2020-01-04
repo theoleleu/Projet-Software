@@ -103,7 +103,7 @@ public class MenuController {
 
     public javafx.scene.control.Button btnQuitter;
     public javafx.scene.canvas.Canvas Canvas;
-    boolean charge;
+    private boolean charge;
     private Group root;
 
     public MenuController() {
