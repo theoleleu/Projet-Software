@@ -7,7 +7,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextField?>
 <Pane fx:controller="sample.ArcController"
-      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="positionX" layoutX="320.0" layoutY="28.0" text="" visible="true"/>
         <Label fx:id="positionY" layoutX="320.0" layoutY="64.0" text="" visible="true"/>

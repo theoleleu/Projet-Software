@@ -230,7 +230,7 @@ public class MenuController {
                 if (TableNode.get(j).nom.equals(nom)) {
                     NodeExist = true;
                 }
-                j++;
+                ++j;
             }
         if (NodeExist){
             message("Le Noeud " + nom + " existe déjà.","Merci de choisir un autre Nom.");
@@ -269,7 +269,7 @@ public class MenuController {
                     arriveN = TableN.get(j);
                 }
             }
-            j++;
+            ++j;
         }
         boolean ArcExist = false;
         j = 0;
@@ -277,7 +277,7 @@ public class MenuController {
             if (TableArc.get(j).nom.equals(nom)) {
                 ArcExist = true;
             }
-            j++;
+            ++j;
         }
         if (ArcExist){
             message("L'arc " + nom + " existe déjà.","Merci de choisir un autre Nom.");
@@ -323,7 +323,7 @@ public class MenuController {
                     arriveNode = TableNode.get(j);
                 }
             }
-            j++;
+            ++j;
         }
         VectorA vectorA = null;
         VectorArc vectorArc = null;
@@ -340,7 +340,7 @@ public class MenuController {
                 vectorArc = TableArc.get(k);
                 vectorA = TableA.get(k);
             }
-            k++;
+            ++k;
         }
         boolean ObjectExist = false;
         j = 0;
@@ -348,7 +348,7 @@ public class MenuController {
             if (TableObject.get(j).nom.equals(nom)) {
                 ObjectExist = true;
             }
-            j++;
+            ++j;
         }
         if (ObjectExist) {
             message("L'objet "+ nom + " existe déjà.","Merci de choisir un autre nom.");
@@ -374,7 +374,7 @@ public class MenuController {
         stage.close();
     }
     public void avancer() {
-        this.temps++;
+        ++this.temps;
         for (int i=0;i<TableObject.size();i++){
             VectorObject objet=TableObject.get(i);
             VectorO o=TableO.get(i);
@@ -483,10 +483,10 @@ public class MenuController {
             }
         } else if (radioSupprimer.isSelected()){
             if(radioArc.isSelected()){
-                message("Fonction non implémentée","Désolé !");
+                message("Fonction non Implémentée !","Désolé !");
                 //this.root.getChildren().remove(line);
             } else if (radioNoeud.isSelected()){
-                message("Fonction non implémentée","Désolé !");
+                message("Fonction non Implémentée !","Désolé !");
                     //this.root.getChildren().remove(cercle);
                     //this.root.getChildren().remove(text);
             } else if (radioObjet.isSelected()){
@@ -509,7 +509,7 @@ public class MenuController {
                             TableO.remove(TableO.get(j));
                             Object = TableObject.get(j);
                         }
-                        j++;
+                        ++j;
                     }
                     if (!NodeExist) {
                         message("Le noeud "+ nom +"  n'existe pas","Vous ne pouvez pas le supprimer");
@@ -600,7 +600,7 @@ public class MenuController {
                 if (TableNode.get(j).nom.equals(arc.arrivee)) {
                     arriveNode = TableNode.get(j);
                 }
-                j++;
+                ++j;
             }
             assert arriveNode != null;
             assert departNode != null;
@@ -619,7 +619,7 @@ public class MenuController {
                 if (TableNode.get(j).nom.equals(objet.arrivee)) {
                     arrivee = TableNode.get(j);
                 }
-                j++;
+                ++j;
             }
             VectorArc arc = null;
             int i = 0;
@@ -627,7 +627,7 @@ public class MenuController {
                 if (TableArc.get(i).nom.equals(objet.arc)) {
                     arc = TableArc.get(i);
                 }
-                i++;
+                ++i;
             }
             affobjet(cercle, text, objet.x, objet.y, objet.nom, objet.donnee, depart, arrivee, objet.vitesse, arc);
         }
