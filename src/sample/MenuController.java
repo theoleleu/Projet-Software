@@ -184,8 +184,8 @@ public class MenuController {
         cercle.setRadius(5);
         cercle.setFill(Color.BLACK);
         this.root.getChildren().add(cercle);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
-        text.setX(x + 168);
-        text.setY(y-5);
+        text.setX(x + 186);
+        text.setY(y-3);
         text.setText(nom);
         //Création de l'espace de stockage des Objets
         VectorObject element = new VectorObject(cercle, x, y, nom, donnees, departNode, arriveNode, vitesse, text, vectorArc, this.temps);
@@ -375,8 +375,8 @@ public class MenuController {
             objet.cercle.setCenterY(objet.y);
             this.root.getChildren().add(objet.cercle);
             this.root.getChildren().remove(objet.text);
-            objet.text.setX(objet.x + 183);//réglage de la position, de la taille et de la couleur du text
-            objet.text.setY(objet.y);
+            objet.text.setX(objet.x + 186);//réglage de la position, de la taille et de la couleur du text
+            objet.text.setY(objet.y-3);
             this.root.getChildren().add(objet.text);
             }
         }
