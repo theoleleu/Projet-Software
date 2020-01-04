@@ -576,7 +576,8 @@ public class MenuController {
             affarc(line,text, arc.nom, arc.capacite, departNode, arriveNode, arc.longueur, arc.doublesens);
         }
         for (VectorO objet : TableO) {
-
+            Circle cercle=new Circle();
+            Text text = new Text();
             VectorNode depart = null;
             VectorNode arrivee = null;
             int j = 0;
@@ -595,10 +596,10 @@ public class MenuController {
                 if (TableArc.get(i).nom.equals(objet.arc)) {
                     arc = TableArc.get(i);
                 }
-                Circle cercle = new Circle();
-                Text text = new Text();
                 affobjet(cercle, text, objet.x, objet.y, objet.nom, objet.donnee, depart, arrivee, objet.vitesse, arc);
             }
+
+            //
         }
     }
 
