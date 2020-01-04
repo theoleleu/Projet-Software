@@ -12,7 +12,7 @@ public class Main extends Application {
     /**
      * Permet de créer l'interface utilisateur et de démarrer l'application
      * @param primaryStage Interface utilisateur
-     * @throws Exception Problème avec l'application
+     * @throws Exception Problème au lancement
      */
     @Override
     public void start(Stage primaryStage) throws Exception{

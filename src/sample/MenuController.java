@@ -161,7 +161,7 @@ public class MenuController {
     /**
      * Initialise le temps et le booléen qui empèche de charger 2 fois les mêmes information depuis la sauvegarde
      */
-    MenuController() {
+    public MenuController() {
         this.charge=false;
         this.temps = 0.0;
     }
