@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -196,7 +195,7 @@ public class MenuController {
     }
 
     private void affobjet(Circle cercle, Text text, Double x, Double y, String nom, String donnees, VectorNode departNode,
-                          VectorNode arriveNode, Double vitesse, VectorArc vectorArc) {
+                          VectorNode arriveNode, Double vitesse, VectorArc vectorArc,Double t0) {
         cercle.setCenterX(x + 183);
         cercle.setCenterY(y);
         cercle.setRadius(5);
@@ -206,7 +205,7 @@ public class MenuController {
         text.setY(y-3);
         text.setText(nom);
         //Création de l'espace de stockage des Objets
-        VectorObject element = new VectorObject(cercle, x, y, nom, donnees, departNode, arriveNode, vitesse, text, vectorArc, this.temps);
+        VectorObject element = new VectorObject(cercle, x, y, nom, donnees, departNode, arriveNode, vitesse, text, vectorArc, t0);
         TableObject.add(element);
         System.out.println("Vecteur des Objets :");
         for (VectorObject vectorObject : TableObject) {
@@ -365,7 +364,7 @@ public class MenuController {
         Text text = new Text();
         VectorO elem = new VectorO(x, y, nom, donnees, departN.nom, arriveN.nom, vitesse, vectorA.nom, this.temps);
         TableO.add(elem);
-        affobjet(cercle, text, x, y, nom, donnees, departNode, arriveNode, vitesse, vectorArc);}
+        affobjet(cercle, text, x, y, nom, donnees, departNode, arriveNode, vitesse, vectorArc,this.temps);}
     }
 
 
@@ -629,7 +628,7 @@ public class MenuController {
                 }
                 ++i;
             }
-            affobjet(cercle, text, objet.x, objet.y, objet.nom, objet.donnee, depart, arrivee, objet.vitesse, arc);
+            affobjet(cercle, text, objet.x, objet.y, objet.nom, objet.donnee, depart, arrivee, objet.vitesse, arc,objet.t0);
         }
     }
 
