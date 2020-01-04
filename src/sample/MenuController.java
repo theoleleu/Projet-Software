@@ -103,10 +103,11 @@ public class MenuController {
 
     public javafx.scene.control.Button btnQuitter;
     public javafx.scene.canvas.Canvas Canvas;
-
+    boolean charge;
     private Group root;
 
     public MenuController() {
+        this.charge=false;
         this.temps = 0.0;
     }
 
@@ -561,6 +562,7 @@ public class MenuController {
     }
 
     public void charger() {
+        if (!this.charge){
         try {
             FileInputStream fileInN = new FileInputStream("Noeuds");
             ObjectInputStream oisN = new ObjectInputStream(fileInN);
@@ -577,10 +579,11 @@ public class MenuController {
             TableO = (ArrayList<VectorO>) oisO.readObject();
             oisO.close();
             fileInO.close();
-        } catch (
-                ClassNotFoundException | IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
+
+        this.charge=true;
         for (VectorN node : TableN) {
             Circle cercle = new Circle();
             Text text = new Text();
@@ -629,7 +632,7 @@ public class MenuController {
                 ++i;
             }
             affobjet(cercle, text, objet.x, objet.y, objet.nom, objet.donnee, depart, arrivee, objet.vitesse, arc,objet.t0);
-        }
+        }}
     }
 
 }
