@@ -15,6 +15,9 @@ import java.io.Serializable;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Classe permettant de stocker un objet
+ */
 class VectorObject
     {
         Double t0;
@@ -28,6 +31,21 @@ class VectorObject
         Double x;
         Double y;
         VectorArc arc;
+
+        /**
+         * Permet de construire un objet
+         * @param cercle Cercle permettant de représenter l'objet
+         * @param x Position de l'objet selon x
+         * @param y Position de l'objet selon y
+         * @param nom Nom de l'objet
+         * @param donnee Donnée à transmettre au noeud arrivée
+         * @param depart Noeud de départ
+         * @param arrivee Noeud d'arrivée
+         * @param vitesse Vitesse de l'objet
+         * @param text Label indiquant le nom de l'objet
+         * @param arc Arc par lequel circule l'objet
+         * @param t0 Temps de création de l'objet
+         */
         VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text, VectorArc arc, Double t0) {
             this.t0=t0;
             this.cercle = cercle;
@@ -43,6 +61,10 @@ class VectorObject
         }
 
     }
+
+/**
+ * Classe permettant de stocker un arc
+ */
 class VectorArc
 {
     Boolean doublesens;
@@ -53,6 +75,18 @@ class VectorArc
     Integer capacite;
     VectorNode depart;
     VectorNode arrivee;
+
+    /**
+     * Fonction permettant de construire l'arc
+     * @param line Ligne permettant de répresenter l'arc
+     * @param text Label montrant le nom de l'arc
+     * @param nom Nom de l'arc
+     * @param capacite Capacité de l'arc
+     * @param depart Noeud de départ de l'arc
+     * @param arrivee Noeud d'arrivé de l'arc
+     * @param longueur Longueur de l'arc
+     * @param doublesens L'arc se parcourt en doublesens ? True or False
+     */
     VectorArc(Line line, Text text, String nom, Integer capacite, VectorNode depart, VectorNode arrivee, Double longueur, Boolean doublesens){
         this.text=text;
         this.line = line;
@@ -65,6 +99,10 @@ class VectorArc
     }
 
 }
+
+/**
+ * Classe permettant de stocker un Noeud
+ */
 class VectorNode
 {   Circle cercle;
     Text text;
@@ -72,6 +110,16 @@ class VectorNode
     Double capacite;
     Double x;
     Double y;
+
+    /**
+     * Fonction permettant de créer un noeud
+     * @param cercle Cercle permettant de représenter un noeud
+     * @param text Label affichant le nom du noeud
+     * @param nom Nom du noeud
+     * @param capacite Capacité du Noeud(non implémenté)
+     * @param x Position du Noeud selon x
+     * @param y Postion du Noeud selon y
+     */
     VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x, Double y)
     {
         this.cercle = cercle;
@@ -84,6 +132,10 @@ class VectorNode
     }
 
 }
+
+/**
+ * Permet de gérer l'application : Fonction Principale
+ */
 public class MenuController {
 
 
@@ -106,17 +158,29 @@ public class MenuController {
     private boolean charge;
     private Group root;
 
-    public MenuController() {
+    /**
+     * Initialise le temps et le booléen qui empèche de charger 2 fois les mêmes information depuis la sauvegarde
+     */
+    MenuController() {
         this.charge=false;
         this.temps = 0.0;
     }
 
-
+    /**
+     * @param root espace d'affichage de l'application
+     * Permet d'écrire depuis le controller
+     */
     void setRoot(Group root) {
         this.root = root;
     }
 
-    private void message(String entete,String message){
+    /**
+     * Permet de créer une interface pour afficher un message
+     * @param entete 1ère ligne de l'interface
+     * @param message 2ème ligne de l'interface
+     * @param nomint Nom de l'interface
+     */
+    void message(String entete, String message,String nomint){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Message.fxml"));
             Parent p = loader.load();
@@ -124,7 +188,7 @@ public class MenuController {
             Group root2 = new Group(p);
             MessageController.setRoot(root2);
             Stage fils = new Stage();
-            fils.setTitle("Objet Arrivé");
+            fils.setTitle(nomint);
             fils.setScene(new Scene(root2, 300, 100));
             fils.show();
             MessageController.messsage(message,entete);
@@ -134,6 +198,15 @@ public class MenuController {
         }
     }
 
+    /**
+     * Permet d'afficher le noeud et de l'enregistrer avec les informations fournies
+     * @param cercle Cercle associé au noeud représenté
+     * @param text Label associé au noeud
+     * @param x position du noeud selon x
+     * @param y position du noeud selon y
+     * @param capacite capacité du noeud (non implémenté)
+     * @param nom Nom du noeud
+     */
     //Evite le doublon de code
     private void affnoeud(Circle cercle, Text text, double x, double y, double capacite, String nom) {
         cercle.setCenterX(x + 183);//réglage de la position, de la taille et de la couleur du cercle
@@ -162,6 +235,17 @@ public class MenuController {
         }
     }
 
+    /**
+     * Permet d'afficher un arc et de l'enregistrer avec les informations fournies
+     * @param line Ligne pour représenter l'arc
+     * @param text Label associé au noeud
+     * @param nom Nom de l'arc
+     * @param capacite Capacité de l'arc (non implémenté)
+     * @param departNode Noeud de départ de l'arc
+     * @param arriveNode Noeud d'arrivé de l'arc
+     * @param longueur Longueur de l'arc
+     * @param doublesens Doublesens ou non
+     */
     private void affarc(Line line,Text text, String nom, Integer capacite, VectorNode departNode, VectorNode arriveNode, Double longueur,Boolean doublesens) {
         Double DX = departNode.x;
         Double DY = departNode.y;
@@ -196,6 +280,20 @@ public class MenuController {
         }
     }
 
+    /**
+     * Permet d'afficher un objet et de l'enregistrer avec les informations fournies
+     * @param cercle Cercle représentant l'objet
+     * @param text Labal associé à l'objet
+     * @param x Position de l'objet selon x
+     * @param y Position de l'objet selon y
+     * @param nom Nom de l'objet
+     * @param donnees Données que l'objet doit transmettre au noeud
+     * @param departNode Noeud de départ
+     * @param arriveNode Noeud d'arrivée
+     * @param vitesse Vitesse de l'objet
+     * @param vectorArc Arc par lequel passe l'objet
+     * @param t0 Temps de création de l'objet
+     */
     private void affobjet(Circle cercle, Text text, Double x, Double y, String nom, String donnees, VectorNode departNode,
                           VectorNode arriveNode, Double vitesse, VectorArc vectorArc,Double t0) {
         cercle.setCenterX(x + 183);
@@ -223,157 +321,79 @@ public class MenuController {
     }
 
 
+    /**
+     * Permet de créer un Noeud avec les informations en entrée
+     * @param x Position du nom selon l'axe x
+     * @param y Position du nom selon l'axe y
+     * @param capacite Capacite du Noeud (non implémenté)
+     * @param nom Nom du noeud
+     */
     private void createNode(Double x, Double y, Double capacite, String nom) {//Permet d'afficher un Noeud
-
-        boolean NodeExist = false;
-        int j = 0;
-        while ((!NodeExist ) && j < TableNode.size()) {
-                if (TableNode.get(j).nom.equals(nom)) {
-                    NodeExist = true;
-                }
-                ++j;
-            }
-        if (NodeExist){
-            message("Le Noeud " + nom + " existe déjà.","Merci de choisir un autre Nom.");
-        }
-        else {
             Circle cercle = new Circle();
             Text text = new Text();
             affnoeud(cercle, text, x, y, capacite, nom);
             //Création de l'espace de stockage des Noeuds
             VectorN elem = new VectorN(nom, capacite, x, y);
             TableN.add(elem);
-        }
+
     }
-    private void createarc(String nom, Integer capacite, String depart, String arrivee, Double longueur,Boolean doublesens) {//A modifier avec le corps de l'algo
 
-        boolean NodeDEPExist = false;
-        boolean NodeARRExist = false;
-
-        VectorN departN = null;
-        VectorN arriveN = null;
-        VectorNode departNode = null;
-        VectorNode arriveNode = null;
-        int j = 0;
-        while ((!NodeDEPExist || !NodeARRExist) && j < TableNode.size()) {
-            if (!NodeDEPExist) {
-                if (TableNode.get(j).nom.equals(depart)) {
-                    NodeDEPExist = true;
-                    departNode = TableNode.get(j);
-                    departN = TableN.get(j);
-                }
-            }
-            if (!NodeARRExist) {
-                if (TableNode.get(j).nom.equals(arrivee)) {
-                    NodeARRExist = true;
-                    arriveNode = TableNode.get(j);
-                    arriveN = TableN.get(j);
-                }
-            }
-            ++j;
-        }
-        boolean ArcExist = false;
-        j = 0;
-        while ((!ArcExist ) && j < TableArc.size()) {
-            if (TableArc.get(j).nom.equals(nom)) {
-                ArcExist = true;
-            }
-            ++j;
-        }
-        if (ArcExist){
-            message("L'arc " + nom + " existe déjà.","Merci de choisir un autre Nom.");
-        }
-        else if (!NodeDEPExist) {
-            message("Le noeud de " + depart + " n'existe pas.","Merci de choisir un noeud de départ valide !");
-        }
-        else if (!NodeARRExist) {
-            message("Le noeud d'arrive " + arrivee + " n'existe pas.","Merci de choisir un noeud d'arrivée valide !");
-        }
-        else {
+    /**
+     * Permet de créer un Arc avec les informations en entrée
+     * @param nom Nom de l'arc
+     * @param capacite Capacite du Noeud (non implémenté)
+     * @param longueur
+     * @param doublesens
+     * @param departNode
+     * @param arriveNode
+     * @param departN
+     * @param arriveN
+     */
+    private void createarc(String nom, Integer capacite, Double longueur,Boolean doublesens,
+                           VectorNode departNode, VectorNode arriveNode,VectorN departN,VectorN arriveN) {//A modifier avec le corps de l'algo
         Line line = new Line();
         Text text = new Text();
         affarc(line, text, nom, capacite, departNode, arriveNode, longueur, doublesens);
         //Création de l'espace de stockage des Arcs
         VectorA elem = new VectorA(nom, capacite, departN.nom, arriveN.nom, longueur,doublesens);
-        TableA.add(elem);}
+        TableA.add(elem);
     }
-    private void createobjet(Double x, Double y, String nom, String donnees, String depart, String arrivee, Double vitesse) {//A modifier avec le corps de l'algo
-        Circle cercle = new Circle();
-        boolean NodeDEPExist = false;
-        boolean NodeARRExist = false;
 
-        VectorN departN = null;
-        VectorN arriveN = null;
-        VectorNode departNode = null;
-        VectorNode arriveNode = null;
-        int j = 0;
-        while ((!NodeDEPExist || !NodeARRExist) && j < TableNode.size()) {
-            if (!NodeDEPExist) {
-                if (TableNode.get(j).nom.equals(depart)) {
-                    NodeDEPExist = true;
-                    departN = TableN.get(j);
-                    departNode = TableNode.get(j);
-                    x = departNode.x;
-                    y = departNode.y;
-                }
-            }
-            if (!NodeARRExist) {
-                if (TableNode.get(j).nom.equals(arrivee)) {
-                    NodeARRExist = true;
-                    arriveN = TableN.get(j);
-                    arriveNode = TableNode.get(j);
-                }
-            }
-            ++j;
-        }
-        VectorA vectorA = null;
-        VectorArc vectorArc = null;
-        boolean ArcExist = false;
-        int k = 0;
-        while (!ArcExist && k < TableArc.size()) {
-            if (TableArc.get(k).depart.nom.equals(depart) && TableArc.get(k).arrivee.nom.equals(arrivee)) {
-                ArcExist = true;
-                vectorArc = TableArc.get(k);
-                vectorA = TableA.get(k);
-            }
-            if (TableArc.get(k).doublesens && TableArc.get(k).depart.nom.equals(arrivee) && TableArc.get(k).arrivee.nom.equals(depart)) {
-                ArcExist = true;
-                vectorArc = TableArc.get(k);
-                vectorA = TableA.get(k);
-            }
-            ++k;
-        }
-        boolean ObjectExist = false;
-        j = 0;
-        while ((!ObjectExist ) && j < TableObject.size()) {
-            if (TableObject.get(j).nom.equals(nom)) {
-                ObjectExist = true;
-            }
-            ++j;
-        }
-        if (ObjectExist) {
-            message("L'objet "+ nom + " existe déjà.","Merci de choisir un autre nom.");
-        }
-        else if (!NodeDEPExist) {
-            message("Le noeud de " + depart + " n'existe pas.","Merci de choisir un noeud de départ valide !");
-        }
-        else if (!NodeARRExist) {
-            message("Le noeud d'arrivée " + arrivee + " n'existe pas.","Merci de choisir un noeud d'arrivée valide !");
-        } else if (!ArcExist) {
-            message("L'arc entre les Noeuds "+ depart +" et "+ arrivee + " n'existe pas.","Merci de choisir des Noeuds reliés par un arc !");
-        }
-        else{
+    /**
+     * Permetde créer un objet avec les informations en entrée
+     * @param x Position de l'objet selon x
+     * @param y Position de l'objet selon y
+     * @param nom Nom de l'objet
+     * @param donnees
+     * @param vitesse Vitesse de l'objet
+     * @param departN Noeud de départ de l'objet (pour la sauvegarde)
+     * @param arriveN Noeud d'arrivée de l'objet (pour la sauvegarde)
+     * @param departNode Noeud de départ de l'objet
+     * @param arriveNode Noeud d'arrivée de l'objet
+     * @param vectorA Arc par lequel passse l'objet (pour la sauvegarde)
+     * @param vectorArc Arc par lequel passe l'objet
+     */
+    private void createobjet(Double x, Double y, String nom, String donnees, Double vitesse,
+                             VectorN departN,VectorN arriveN, VectorNode departNode, VectorNode arriveNode,VectorA vectorA,VectorArc vectorArc) {//A modifier avec le corps de l'algo
+        Circle cercle = new Circle();
         Text text = new Text();
         VectorO elem = new VectorO(x, y, nom, donnees, departN.nom, arriveN.nom, vitesse, vectorA.nom, this.temps);
         TableO.add(elem);
         affobjet(cercle, text, x, y, nom, donnees, departNode, arriveNode, vitesse, vectorArc,this.temps);}
-    }
 
 
+    /**
+     * Permet de quitter avec le bouton quitter
+     */
     public void quitFen() {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Permet l'avancée du point dans le temps
+     * Il transmet un message (donnée) lorsqu'il arrive à destination
+     */
     public void avancer() {
         ++this.temps;
         for (int i=0;i<TableObject.size();i++){
@@ -396,7 +416,7 @@ public class MenuController {
             else {
                 objet.x = objet.arrivee.x;
                 objet.y = objet.arrivee.y;
-                message("Message du Noeud " + objet.depart.nom + " au Noeud "+ objet.arrivee.nom + " :",objet.donnee);
+                message("Message du Noeud " + objet.depart.nom + " au Noeud "+ objet.arrivee.nom + " :",objet.donnee,"Message Arrivé");
             }
             o.x=objet.x;
             o.y=objet.y;
@@ -412,6 +432,12 @@ public class MenuController {
         }
 
     }
+
+    /**
+     * Interface utilisateur pour ajout suppression
+     * Permet de faire le lien avec les autres controllers afin d'inviter l'utilisateur à renseigner les différents champs
+     * @param mouseEvent Clic sur l'écran pour obtenir la position (pour le Noeud)
+     */
     public void CanvasFunction(MouseEvent mouseEvent) {
         double x = mouseEvent.getX();
         double y = mouseEvent.getY();//Positions du clic
@@ -422,6 +448,7 @@ public class MenuController {
                     Parent p = loader.load();
                     ArcController arcController = loader.getController();
                     arcController.setCoord("X : "+ x,"Y : "+ y);
+                    arcController.setTable(TableNode,TableArc,TableN);
                     Stage fils = new Stage();
                     fils.setTitle("Création Arc");
                     fils.setScene(new Scene(p, 400, 240));
@@ -431,9 +458,8 @@ public class MenuController {
                         // Utiliser les fonctions extraites de l'interface
                         arcController.getnom();
                         arcController.getcapacity();
-                        arcController.getdebut();
-                        arcController.getfin();
-                        this.createarc(arcController.getnom(), arcController.getcapacity(), arcController.getdebut(), arcController.getfin(),arcController.getlongueur(),arcController.isdoublesens());
+                        this.createarc(arcController.getnom(), arcController.getcapacity(),arcController.getlongueur(),
+                                arcController.isdoublesens(), arcController.getdepartNode(), arcController.getarriveeNode(),arcController.getdepartN(), arcController.getarriveeN());
                     }
                 } catch (IOException | NullPointerException e){
                     e.printStackTrace();
@@ -444,6 +470,7 @@ public class MenuController {
                     Parent p = loader.load();
                     nodeController nodeController = loader.getController();
                     nodeController.setCoord("X : "+ x,"Y : "+ y);
+                    nodeController.setTableNode(TableNode);
                     Stage fils = new Stage();
                     fils.setTitle("Création Noeud");
                     fils.setScene(new Scene(p, 400, 200));
@@ -464,13 +491,15 @@ public class MenuController {
                     Parent p = loader.load();
                     ObjetController objetController = loader.getController();
                     objetController.setCoord("X : "+ x,"Y : "+ y);
+                    objetController.setTable(TableNode,TableArc,TableA,TableN,TableObject);
                     Stage fils = new Stage();
                     fils.setTitle("Création Objet");
                     fils.setScene(new Scene(p, 400, 200));
                     fils.showAndWait();
                     if (objetController.isvalide()) {
-
-                        this.createobjet(x, y, objetController.getname(), objetController.getDonnees(), objetController.getDepart(), objetController.getArrivee(), objetController.getVitesse());
+                        this.createobjet(objetController.getx(), objetController.gety(), objetController.getname(), objetController.getDonnees(),
+                                objetController.getVitesse(),objetController.getdepartN(),objetController.getarriveeN(),objetController.getdepartNode()
+                                ,objetController.getarriveeNode(),objetController.getA(),objetController.getArc());
                     }} catch (IOException | NullPointerException e){
                     e.printStackTrace();
                 }
@@ -484,10 +513,10 @@ public class MenuController {
             }
         } else if (radioSupprimer.isSelected()){
             if(radioArc.isSelected()){
-                message("Fonction non Implémentée !","Désolé !");
+                message("Fonction non Implémentée !","Désolé !","Erreur");
                 //this.root.getChildren().remove(line);
             } else if (radioNoeud.isSelected()){
-                message("Fonction non Implémentée !","Désolé !");
+                message("Fonction non Implémentée !","Désolé !","Erreur");
                     //this.root.getChildren().remove(cercle);
                     //this.root.getChildren().remove(text);
             } else if (radioObjet.isSelected()){
@@ -513,7 +542,7 @@ public class MenuController {
                         ++j;
                     }
                     if (!NodeExist) {
-                        message("Le noeud "+ nom +"  n'existe pas","Vous ne pouvez pas le supprimer");
+                        message("Le noeud "+ nom +"  n'existe pas","Vous ne pouvez pas le supprimer","Nom Incorrect");
 
                     }
                     else {
@@ -536,6 +565,10 @@ public class MenuController {
             }
         }
     }
+
+    /**
+     * Permet d'enregistrer les élements ajoutés
+     */
     public void enregistrer() {
         //Enregistrement nécessite d'implémenter l'interface sérialisable
         try {
@@ -562,6 +595,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Permet de charger les éléments précédemeent enregistrés
+     */
     public void charger() {
         if (!this.charge){
         try {
@@ -638,6 +674,9 @@ public class MenuController {
 
 }
 
+/**
+ * Classe Serializable pour l'enregistrement de la classe VectorObjet
+ */
 class VectorO implements Serializable
 {
     Double t0;
@@ -662,6 +701,10 @@ class VectorO implements Serializable
     }
 
 }
+
+/**
+ * Classe Serializable pour l'enregistrement de la classe VectorArc
+ */
 class VectorA implements Serializable
 {
     Double longueur;
@@ -680,6 +723,10 @@ class VectorA implements Serializable
     }
 
 }
+
+/**
+ * Classe Serializable pour l'enregistrement de la classe VectorNode
+ */
 class VectorN implements Serializable
 {
     String nom;
@@ -694,5 +741,4 @@ class VectorN implements Serializable
         this.capacite = capacite;
 
     }
-
 }

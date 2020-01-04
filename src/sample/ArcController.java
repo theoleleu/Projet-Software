@@ -3,6 +3,8 @@ package sample;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class ArcController {
 
     public javafx.scene.control.Button closeButton;
@@ -18,14 +20,24 @@ public class ArcController {
     public javafx.scene.control.TextField FinArc;
     private int capacity;
     private String nom;
-    private String debut;
-    private String fin;
     private boolean valide;
     private double longueur;
     private boolean doublesens;
+    private ArrayList<VectorArc> TableArc = new ArrayList<>(13);
+    private ArrayList<VectorNode> TableNode = new ArrayList<>(13);
+    private ArrayList<VectorN> TableN = new ArrayList<>(13);
+    private VectorN departN;
+    private VectorN arriveN;
+    private VectorNode departNode;
+    private VectorNode arriveNode;
 
     public ArcController(){
         this.valide=false;
+    }
+    void setTable(ArrayList<VectorNode> TableNode,ArrayList<VectorArc> TableArc,ArrayList<VectorN> TableN){
+        this.TableNode=TableNode;
+        this.TableN=TableN;
+        this.TableArc=TableArc;
     }
     void setCoord(String x, String y){
         positionX.setText(x);
@@ -43,17 +55,21 @@ public class ArcController {
         stage.close();
     }
     int getcapacity(){
-    return this.capacity;
+        return this.capacity;
     }
     String getnom(){
         return this.nom;
     }
-    String getdebut(){
-        return this.debut;
+    VectorNode getdepartNode(){
+        return this.departNode;
     }
-    String getfin(){
-        return this.fin;
+    VectorNode getarriveeNode(){
+        return this.arriveNode;
     }
+    VectorN getdepartN(){ return this.departN; }
+    VectorN getarriveeN(){ return this.arriveN; }
+
+
     Double getlongueur(){
         return this.longueur;
     }
@@ -67,15 +83,60 @@ public class ArcController {
         } else {
             try {
                 this.nom=NameArc.getText();
-                Integer.parseInt(CapacityArc.getText());
-                this.longueur=Double.parseDouble(LongueurArc.getText());
-                this.debut=DebutArc.getText();
-                this.fin=FinArc.getText();
 
+                this.longueur=Double.parseDouble(LongueurArc.getText());
+                String depart=DebutArc.getText();
+                String arrivee=FinArc.getText();
+                this.capacity=Integer.parseInt(CapacityArc.getText());
                 this.doublesens= DoubleSens.isSelected();
+                boolean NodeDEPExist = false;
+                boolean NodeARRExist = false;
+
+
+                int j = 0;
+                while ((!NodeDEPExist || !NodeARRExist) && j < TableNode.size()) {
+                    if (!NodeDEPExist) {
+                        if (TableNode.get(j).nom.equals(depart)) {
+                            NodeDEPExist = true;
+                            this.departNode = TableNode.get(j);
+                            this.departN = TableN.get(j);
+                        }
+                    }
+                    if (!NodeARRExist) {
+                        if (TableNode.get(j).nom.equals(arrivee)) {
+                            NodeARRExist = true;
+                            this.arriveNode = TableNode.get(j);
+                            this.arriveN = TableN.get(j);
+                        }
+                    }
+                    ++j;
+                }
+                boolean ArcExist = false;
+                j = 0;
+                while ((!ArcExist ) && j < TableArc.size()) {
+                    if (TableArc.get(j).nom.equals(nom)) {
+                        ArcExist = true;
+                    }
+                    ++j;
+                }
+                MenuController C= new MenuController();
+                if (depart.equals(arrivee)){
+                    C.message("Les extrémités de l'Arc sont identiques.","Merci de choisir deux points distincts !","Arc Nul");
+                }
+                else if (ArcExist){
+                    C.message("L'arc " + nom + " existe déjà.","Merci de choisir un autre Nom.","Nom Incorrect");
+                }
+                else if (!NodeDEPExist) {
+                    C.message("Le noeud de " + depart + " n'existe pas.","Merci de choisir un noeud de départ valide !","Noeud Invalide");
+                }
+                else if (!NodeARRExist) {
+                    C.message("Le noeud d'arrivée " + arrivee + " n'existe pas.","Merci de choisir un noeud d'arrivée valide !","Noeud Invalide");
+                }
+                else {
+
                 Stage stage = (Stage) validerButton.getScene().getWindow();
                 stage.close();
-                this.valide=true;
+                this.valide=true;}
             } catch (java.lang.RuntimeException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Création Arc");
@@ -85,4 +146,5 @@ public class ArcController {
             }
         }
     }
+
 }

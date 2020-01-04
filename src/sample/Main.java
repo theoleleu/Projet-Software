@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    /**
+     * Permet de créer l'interface utilisateur et de démarrer l'application
+     * @param primaryStage Interface utilisateur
+     * @throws Exception Problème avec l'application
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -23,6 +28,9 @@ public class Main extends Application {
     }
 
 
+    /**
+     * @param args Programme à lancer
+     */
     public static void main(String[] args) {
         launch(args);
     }

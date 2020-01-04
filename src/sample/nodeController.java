@@ -2,6 +2,9 @@ package sample;
 
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class nodeController {
 
     public javafx.scene.control.Button closeButton;
@@ -15,12 +18,17 @@ public class nodeController {
     private String nom;
     private boolean valide;
 
+    private ArrayList<VectorNode> TableNode = new ArrayList<>(13);
+
     public nodeController(){
         this.valide=false;
     }
     void setCoord(String x, String y){
         positionX.setText(x);
         positionY.setText(y);
+    }
+    void setTableNode(ArrayList<VectorNode> Table){
+        this.TableNode=Table;
     }
     boolean isvalide(){
         return this.valide;
@@ -45,9 +53,22 @@ public class nodeController {
                 int capacity = Integer.parseInt(nodeCapacity.getText());
                 this.nom=name;
                 this.capacite=capacity;
+                boolean NodeExist = false;
+                int j = 0;
+                while ((!NodeExist ) && j < this.TableNode.size()) {
+                    if (this.TableNode.get(j).nom.equals(nom)) {
+                        NodeExist = true;
+                    }
+                    ++j;
+                }
+                if (NodeExist){
+                    MenuController C= new MenuController();
+                    C.message("Le Noeud " + nom + " existe déjà.","Merci de choisir un autre Nom.","Nom Incorrect");
+                }
+                else {
                 Stage stage = (Stage) validateButton.getScene().getWindow();
                 stage.close();
-                this.valide=true;
+                this.valide=true;}
             } catch (java.lang.RuntimeException e) {
                 capacityWarning.setText("Attention : la capacité doit être un entier");
             }
