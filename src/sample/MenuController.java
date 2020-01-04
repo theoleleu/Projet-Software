@@ -424,8 +424,38 @@ public class MenuController<E> {
                     //this.root.getChildren().remove(cercle);
                     //this.root.getChildren().remove(text);
             } else if (radioObjet.isSelected()){
-                //this.root.getChildren().remove(cercle);
-                //this.root.getChildren().remove(text;
+                try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("objetsuppr.fxml"));
+                Parent p = loader.load();
+                ObjetControllerSuppr objetControllerSuppr = loader.getController();
+                Stage fils = new Stage();
+                fils.setTitle("Suppression Objet");
+                fils.setScene(new Scene(p, 300, 100));
+                fils.showAndWait();
+                boolean NodeExist = false;
+                VectorO O = null;
+                VectorObject Object = null;
+                int j = 0;
+                while ((!NodeExist) && j < TableNode.size()) {
+                    if (TableNode.get(j).nom.equals(objetControllerSuppr.getname())) {
+                            NodeExist = true;
+                            TableO.remove(TableO.get(j));
+                            Object = TableObject.get(j);
+                    }
+                    j++;
+                }
+                if (!NodeExist) {
+                    System.out.println("le node n'existe pas");
+                    System.exit(1);
+                }
+
+                this.root.getChildren().remove(Object.cercle);
+                this.root.getChildren().remove(Object.text);
+                TableObject.remove(TableObject);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Test Suppression");
