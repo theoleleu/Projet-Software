@@ -378,7 +378,7 @@ public class MenuController {
             VectorObject objet=TableObject.get(i);
             VectorO o=TableO.get(i);
             Double lambda=objet.vitesse*(this.temps-objet.t0)/(objet.arc.longueur);
-            Double l=objet.vitesse*(this.temps-1-objet.t0)/(objet.arc.longueur);
+            double l=objet.vitesse*(this.temps-1-objet.t0)/(objet.arc.longueur);
             if (l>=1){
                 this.root.getChildren().remove(objet.cercle);
                 this.root.getChildren().remove(objet.text);
