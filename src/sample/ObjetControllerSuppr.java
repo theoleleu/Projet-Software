@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -17,19 +16,19 @@ public class ObjetControllerSuppr {
     }
 
 
-    public boolean isvalide(){
+    boolean isvalide(){
         return this.valide;
     }
 
-    public String getname(){
+    String getname(){
         return this.nom;
     }
-    public void quitFen(ActionEvent actionEvent) {
+    public void quitFen() {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();
         stage.close();
     }
 
-    public void validerFen(ActionEvent actionEvent) {
+    public void validerFen() {
         if(tfNom.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Test Suppression Objet");

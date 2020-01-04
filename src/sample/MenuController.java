@@ -432,26 +432,28 @@ public class MenuController<E> {
                 fils.setTitle("Suppression Objet");
                 fils.setScene(new Scene(p, 300, 100));
                 fils.showAndWait();
-                boolean NodeExist = false;
-                VectorO O = null;
-                VectorObject Object = null;
-                int j = 0;
-                while ((!NodeExist) && j < TableNode.size()) {
-                    if (TableNode.get(j).nom.equals(objetControllerSuppr.getname())) {
+                if (objetControllerSuppr.isvalide()) {
+                    boolean NodeExist = false;
+                    VectorObject Object = null;
+                    int j = 0;
+                    while ((!NodeExist) && j < TableNode.size()) {
+                        if (TableNode.get(j).nom.equals(objetControllerSuppr.getname())) {
                             NodeExist = true;
                             TableO.remove(TableO.get(j));
                             Object = TableObject.get(j);
+                        }
+                        j++;
                     }
-                    j++;
-                }
-                if (!NodeExist) {
-                    System.out.println("le node n'existe pas");
-                    System.exit(1);
-                }
+                    if (!NodeExist) {
+                        System.out.println("le node n'existe pas");
 
-                this.root.getChildren().remove(Object.cercle);
-                this.root.getChildren().remove(Object.text);
-                TableObject.remove(TableObject);
+                    }
+                    else {
+                        this.root.getChildren().remove(Object.cercle);
+                        this.root.getChildren().remove(Object.text);
+                        TableObject.remove(Object);
+                    }
+                }
                 }
                 catch (IOException e) {
                     e.printStackTrace();
