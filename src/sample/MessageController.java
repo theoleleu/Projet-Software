@@ -32,12 +32,12 @@ public class MessageController {
     }
 
 
-    public void messsage(String M,String depart,String arrivee){
+    public void messsage(String M,String entete){
         Text nom = new Text();
         nom.setX(10);
         nom.setY(24);
         nom.setFont(new Font("Arial", 12));
-        nom.setText("Message du Noeud " + depart + " au Noeud "+ arrivee + ":");
+        nom.setText(entete);
         this.root.getChildren().add(nom);
         Text text = new Text();
         text.setX(10);

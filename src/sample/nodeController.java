@@ -44,8 +44,6 @@ public class nodeController {
             String name = nodeName.getText();
             try {
                 int capacity = Integer.parseInt(nodeCapacity.getText());
-                System.out.println(name);
-                System.out.println(capacity);
                 this.nom=name;
                 this.capacite=capacity;
                 Stage stage = (Stage) validateButton.getScene().getWindow();

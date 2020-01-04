@@ -67,23 +67,16 @@ public class ArcController {
             alert.showAndWait();
         } else {
             try {
-                System.out.println(NameArc.getText());
                 this.nom=NameArc.getText();
                 Integer.parseInt(CapacityArc.getText());
-                System.out.println(CapacityArc.getText());
-                this.capacity=Integer.parseInt(CapacityArc.getText());
                 this.longueur=Double.parseDouble(LongueurArc.getText());
-                System.out.println(DebutArc.getText());
                 this.debut=DebutArc.getText();
-                System.out.println(FinArc.getText());
                 this.fin=FinArc.getText();
 
                 if(DoubleSens.isSelected()){
                     this.doublesens=true;
-                    System.out.println("Double sens : Activé");
                 } else {
                     this.doublesens=false;
-                    System.out.println("Double sens : Désactivé");
                 }
                 Stage stage = (Stage) validerButton.getScene().getWindow();
                 stage.close();

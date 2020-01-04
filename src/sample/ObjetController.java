@@ -70,10 +70,6 @@ public class ObjetController {
                 this.Depart=tfDepart.getText();
                 this.Arrivee=tfArrivee.getText();
                 this.Vitesse=Double.parseDouble(tfVitesse.getText());
-                System.out.println(tfDonnees.getText());
-                System.out.println(tfDepart.getText());
-                System.out.println(tfArrivee.getText());
-                System.out.println(tfVitesse.getText());
                 Stage stage = (Stage) btnValider.getScene().getWindow();
                 stage.close();
                 this.valide=true;
