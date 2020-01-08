@@ -511,12 +511,118 @@ public class MenuController {
             }
         } else if (radioSupprimer.isSelected()){
             if(radioArc.isSelected()){
-                message("Fonction non Implémentée !","Désolé !","Erreur");
-                //this.root.getChildren().remove(line);
-            } else if (radioNoeud.isSelected()){
-                message("Fonction non Implémentée !","Désolé !","Erreur");
-                    //this.root.getChildren().remove(cercle);
-                    //this.root.getChildren().remove(text);
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Arcsuppr.fxml"));
+                    Parent p = loader.load();
+                    ArcControllerSuppr ArcControllerSuppr = loader.getController();
+                    Stage fils = new Stage();
+                    fils.setTitle("Suppression Arc");
+                    fils.setScene(new Scene(p, 300, 100));
+                    fils.showAndWait();
+                    String nom = ArcControllerSuppr.getname();
+                    if (ArcControllerSuppr.isvalide()) {
+                        boolean ArcExist = false;
+                        VectorArc Arc = null;
+                        VectorA A = null;
+                        int j = 0;
+                        while ((!ArcExist) && j < TableArc.size()) {
+                            if (TableArc.get(j).nom.equals(nom)) {
+                                ArcExist = true;
+
+                                Arc = TableArc.get(j);
+                                A = TableA.get(j);
+                            }
+                            ++j;
+                        }
+                        if (!ArcExist) {
+                            message("L'arc "+ nom +"  n'existe pas","Vous ne pouvez pas le supprimer","Nom Incorrect");
+                        }
+                        else {
+                            VectorObject Object = null;
+                            j = 0;
+                            while (j < TableObject.size()) {
+                                if (TableObject.get(j).arc.nom.equals(nom)) {
+                                    TableO.remove(TableO.get(j));
+                                    Object = TableObject.get(j);
+                                    this.root.getChildren().remove(Object.cercle);
+                                    this.root.getChildren().remove(Object.text);
+                                    TableObject.remove(Object);
+                                    --j;
+                                }
+                                ++j;
+                            }
+
+                            this.root.getChildren().remove(Arc.line);
+                            this.root.getChildren().remove(Arc.text);
+                            TableArc.remove(Arc);
+                            TableA.remove(A);
+                        }
+                    }
+                }
+                catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (radioNoeud.isSelected()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("nodesuppr.fxml"));
+                Parent p = loader.load();
+                nodeControllerSuppr nodeControllerSuppr = loader.getController();
+                Stage fils = new Stage();
+                fils.setTitle("Suppression Noeud");
+                fils.setScene(new Scene(p, 300, 100));
+                fils.showAndWait();
+                String nom = nodeControllerSuppr.getname();
+                if (nodeControllerSuppr.isvalide()) {
+                    boolean NodeExist = false;
+                    VectorNode Node = null;
+                    VectorN N = null;
+                    int j = 0;
+                    while ((!NodeExist) && j < TableNode.size()) {
+                        if (TableNode.get(j).nom.equals(nom)) {
+                            NodeExist = true;
+                            Node = TableNode.get(j);
+                            N = TableN.get(j);
+                        }
+                        ++j;
+                    }
+                    if (!NodeExist) {
+                        message("Le Noeud " + nom + "  n'existe pas", "Vous ne pouvez pas le supprimer", "Nom Incorrect");
+                    } else {
+                        j = 0;
+                        while (j < TableObject.size()) {
+                            if (TableObject.get(j).depart.nom.equals(nom) || TableObject.get(j).arrivee.nom.equals(nom)) {
+                                TableO.remove(TableO.get(j));
+                                this.root.getChildren().remove(TableObject.get(j).cercle);
+                                this.root.getChildren().remove(TableObject.get(j).text);
+                                TableObject.remove(TableObject.get(j));
+                                --j;
+                            }
+                            ++j;
+                        }
+
+                        VectorArc Arc = null;
+                        j = 0;
+
+                        while (j < TableArc.size()) {
+                            if (TableArc.get(j).depart.nom.equals(nom) || TableArc.get(j).arrivee.nom.equals(nom)) {
+                                TableA.remove(TableA.get(j));
+                                Arc = TableArc.get(j);
+                                this.root.getChildren().remove(Arc.line);
+                                this.root.getChildren().remove(Arc.text);
+                                TableArc.remove(Arc);
+                                --j;
+                            }
+                            ++j;
+                        }
+                        this.root.getChildren().remove(Node.cercle);
+                        this.root.getChildren().remove(Node.text);
+                        TableNode.remove(Node);
+                        TableN.remove(N);
+                    }}}
+                       catch (IOException e) {
+                e.printStackTrace();
+            }
+
             } else if (radioObjet.isSelected()){
                 try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("objetsuppr.fxml"));
@@ -528,19 +634,19 @@ public class MenuController {
                 fils.showAndWait();
                 String nom = objetControllerSuppr.getname();
                 if (objetControllerSuppr.isvalide()) {
-                    boolean NodeExist = false;
+                    boolean ObjectExist = false;
                     VectorObject Object = null;
                     int j = 0;
-                    while ((!NodeExist) && j < TableNode.size()) {
-                        if (TableNode.get(j).nom.equals(nom)) {
-                            NodeExist = true;
+                    while ((!ObjectExist) && j < TableObject.size()) {
+                        if (TableObject.get(j).nom.equals(nom)) {
+                            ObjectExist = true;
                             TableO.remove(TableO.get(j));
                             Object = TableObject.get(j);
                         }
                         ++j;
                     }
-                    if (!NodeExist) {
-                        message("Le noeud "+ nom +"  n'existe pas","Vous ne pouvez pas le supprimer","Nom Incorrect");
+                    if (!ObjectExist) {
+                        message("L'objet "+ nom +"  n'existe pas","Vous ne pouvez pas le supprimer","Nom Incorrect");
 
                     }
                     else {
