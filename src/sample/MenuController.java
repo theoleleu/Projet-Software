@@ -116,11 +116,10 @@ class VectorNode extends Node
      * @param cercle Cercle permettant de représenter un noeud
      * @param text Label affichant le nom du noeud
      * @param nom Nom du noeud
-     * @param capacite Capacité du Noeud(non implémenté)
      * @param x Position du Noeud selon x
      * @param y Postion du Noeud selon y
      */
-    VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x, Double y)
+    VectorNode(Circle cercle, Text text, String nom, Double x, Double y)
     {
         super();
         this.cercle = cercle;
@@ -128,7 +127,6 @@ class VectorNode extends Node
         this.text = text;
         this.x = x;
         this.y = y;
-        this.capacite = capacite;
 
     }
 
@@ -205,14 +203,13 @@ public class MenuController {
      * @param text Label associé au noeud
      * @param x position du noeud selon x
      * @param y position du noeud selon y
-     * @param capacite capacité du noeud (non implémenté)
      * @param nom Nom du noeud
      */
     //Evite le doublon de code
-    private void affnoeud(Circle cercle, Text text, double x, double y, double capacite, String nom) {
+    private void affnoeud(Circle cercle, Text text, double x, double y, String nom) {
         cercle.setCenterX(x + 183);//réglage de la position, de la taille et de la couleur du cercle
         cercle.setCenterY(y);
-        cercle.setRadius(capacite);
+        cercle.setRadius(10);
         text.setX(x + 178);
         text.setY(y + 25);
         text.setText(nom);
@@ -225,14 +222,13 @@ public class MenuController {
         cercle.setStrokeWidth(1);
         this.root.getChildren().add(cercle);
         this.root.getChildren().add(text);
-        VectorNode element = new VectorNode(cercle, text, nom, capacite, x, y);
+        VectorNode element = new VectorNode(cercle, text, nom, x, y);
         TableNode.add(element);
         System.out.println(" Vecteur des Noeuds :");
         for (VectorNode vectorNode : TableNode) {
             System.out.println(" Noeud :" + vectorNode.nom + ": \n");
             System.out.print("X = " + vectorNode.x + " - ");
-            System.out.print("Y = " + vectorNode.y + " - ");
-            System.out.print("Capacite = " + vectorNode.capacite + "\n");
+            System.out.print("Y = " + vectorNode.y + "\n");
         }
     }
 
@@ -267,7 +263,7 @@ public class MenuController {
         line.setStrokeWidth(6);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
         this.root.getChildren().add(text);
-        ArrayList<VectorObject> a=new ArrayList<VectorObject>();
+        ArrayList<VectorObject> a=new ArrayList<>();
         //Création de l'espace de stockage des Arcs
         VectorArc element = new VectorArc(line, text, nom, capacite, departNode, arriveNode, longueur, doublesens,a);
         TableArc.add(element);
@@ -328,16 +324,15 @@ public class MenuController {
      * Permet de créer un Noeud avec les informations en entrée
      * @param x Position du nom selon l'axe x
      * @param y Position du nom selon l'axe y
-     * @param capacite Capacite du Noeud (non implémenté)
      * @param nom Nom du noeud
      */
-    private void createNode(Double x, Double y, Double capacite, String nom) {//Permet d'afficher un Noeud
+    private void createNode(Double x, Double y, String nom) {//Permet d'afficher un Noeud
 
             Circle cercle = new Circle();
             Text text = new Text();
-            affnoeud(cercle, text, x, y, capacite, nom);
+            affnoeud(cercle, text, x, y, nom);
             //Création de l'espace de stockage des Noeuds
-            VectorN elem = new VectorN(nom, capacite, x, y);
+            VectorN elem = new VectorN(nom, x, y);
             TableN.add(elem);
 
     }
@@ -346,12 +341,12 @@ public class MenuController {
      * Permet de créer un Arc avec les informations en entrée
      * @param nom Nom de l'arc
      * @param capacite Capacite du Noeud (non implémenté)
-     * @param longueur
-     * @param doublesens
-     * @param departNode
-     * @param arriveNode
-     * @param departN
-     * @param arriveN
+     * @param longueur longueur de l'arc
+     * @param doublesens oui ou non
+     * @param departNode Noeud de départ de l'arc
+     * @param arriveNode Noeud d'arrivé de l'arc
+     * @param departN Noeud de départ de l'arc (sert à l'enregistrement)
+     * @param arriveN Noeud d'arrivée de l'arc (sert à l'enregistrement)
      */
     private void createarc(String nom, Integer capacite, Double longueur,Boolean doublesens,
                            VectorNode departNode, VectorNode arriveNode,VectorN departN,VectorN arriveN) {//A modifier avec le corps de l'algo
@@ -368,7 +363,7 @@ public class MenuController {
      * @param x Position de l'objet selon x
      * @param y Position de l'objet selon y
      * @param nom Nom de l'objet
-     * @param donnees
+     * @param donnees Données transporté par l'objet et transmise au noeud final
      * @param vitesse Vitesse de l'objet
      * @param departN Noeud de départ de l'objet (pour la sauvegarde)
      * @param arriveN Noeud d'arrivée de l'objet (pour la sauvegarde)
@@ -379,7 +374,6 @@ public class MenuController {
      */
     private void createobjet(Double x, Double y, String nom, String donnees, Double vitesse,
                              VectorN departN,VectorN arriveN, VectorNode departNode, VectorNode arriveNode,VectorA vectorA,VectorArc vectorArc) {//A modifier avec le corps de l'algo
-        System.out.println(vectorArc.points.size());
         if (vectorArc.capacite > vectorArc.points.size()) {
             Circle cercle = new Circle();
             Text text = new Text();
@@ -486,14 +480,13 @@ public class MenuController {
                     nodeController.setTableNode(TableNode);
                     Stage fils = new Stage();
                     fils.setTitle("Création Noeud");
-                    fils.setScene(new Scene(p, 400, 200));
+                    fils.setScene(new Scene(p, 400, 160));
                     fils.showAndWait();
                     if (nodeController.isvalide()) {
                         //Utiliser les fonctions extraites de l'interface
                         nodeController.getname();
-                        nodeController.getcapacite();
 
-                        this.createNode(x, y, nodeController.getcapacite(), nodeController.getname());
+                        this.createNode(x, y, nodeController.getname());
                     }
                 } catch (IOException | NullPointerException e){
                     e.printStackTrace();
@@ -553,7 +546,7 @@ public class MenuController {
                             message("L'arc "+ nom +"  n'existe pas","Vous ne pouvez pas le supprimer","Nom Incorrect");
                         }
                         else {
-                            VectorObject Object = null;
+                            VectorObject Object;
                             j = 0;
                             while (j < TableObject.size()) {
                                 if (TableObject.get(j).arc.nom.equals(nom)) {
@@ -615,7 +608,7 @@ public class MenuController {
                             ++j;
                         }
 
-                        VectorArc Arc = null;
+                        VectorArc Arc;
                         j = 0;
 
                         while (j < TableArc.size()) {
@@ -744,7 +737,7 @@ public class MenuController {
         for (VectorN node : TableN) {
             Circle cercle = new Circle();
             Text text = new Text();
-            affnoeud(cercle, text, node.x, node.y, node.capacite, node.nom);
+            affnoeud(cercle, text, node.x, node.y, node.nom);
         }
         for (VectorA arc : TableA) {
             Line line = new Line();
@@ -850,15 +843,13 @@ class VectorA implements Serializable
 class VectorN implements Serializable
 {
     String nom;
-    Double capacite;
     Double x;
     Double y;
-    VectorN(String nom, Double capacite, Double x, Double y)
+    VectorN(String nom, Double x, Double y)
     {
         this.nom = nom;
         this.x = x;
         this.y = y;
-        this.capacite = capacite;
 
     }
 }

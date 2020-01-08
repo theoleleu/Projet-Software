@@ -4,7 +4,6 @@ import java.util.List;
 public class Node {
 	private int id;
     public String nom;
-    public Double capacite;
     public Double x;
     public Double y;
     public String descripteur;

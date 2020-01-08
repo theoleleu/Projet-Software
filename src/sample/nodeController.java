@@ -10,11 +10,8 @@ public class nodeController {
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button validateButton;
     public javafx.scene.control.TextField nodeName;
-    public javafx.scene.control.TextField nodeCapacity;
-    public javafx.scene.control.Label capacityWarning;
     public javafx.scene.control.Label positionX;
     public javafx.scene.control.Label positionY;
-    private double capacite;
     private String nom;
     private boolean valide;
 
@@ -38,21 +35,12 @@ public class nodeController {
     Stage stage = (Stage) closeButton.getScene().getWindow();
     stage.close();
     }
-    double getcapacite(){
-            return this.capacite;
-    }
     String getname(){
         return this.nom;
     }
     public void validateFen() {//ActionEvent actionEvent
-        if (nodeCapacity.getText().equals("") | nodeName.getText().equals("") ){
-            capacityWarning.setText("Attention : les champs Nom et Capacité sont incomplets");
-        } else {
             String name = nodeName.getText();
-            try {
-                int capacity = Integer.parseInt(nodeCapacity.getText());
                 this.nom=name;
-                this.capacite=capacity;
                 boolean NodeExist = false;
                 int j = 0;
                 while ((!NodeExist ) && j < this.TableNode.size()) {
@@ -69,9 +57,5 @@ public class nodeController {
                 Stage stage = (Stage) validateButton.getScene().getWindow();
                 stage.close();
                 this.valide=true;}
-            } catch (java.lang.RuntimeException e) {
-                capacityWarning.setText("Attention : la capacité doit être un entier");
-            }
-        }
     }
 }
