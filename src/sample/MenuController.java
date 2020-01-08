@@ -17,6 +17,7 @@ import network.Point;
 
 import java.io.Serializable;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -75,6 +76,7 @@ class VectorArc extends Arc
     String nom;
     VectorNode depart;
     VectorNode arrivee;
+    ArrayList<VectorObject> points;
 
     /**
      * Fonction permettant de construire l'arc
@@ -87,7 +89,7 @@ class VectorArc extends Arc
      * @param longueur Longueur de l'arc
      * @param doublesens L'arc se parcourt en doublesens ? True or False
      */
-    VectorArc(Line line, Text text, String nom, Integer capacite, VectorNode depart, VectorNode arrivee, Double longueur, Boolean doublesens){
+    VectorArc(Line line, Text text, String nom, Integer capacite, VectorNode depart, VectorNode arrivee, Double longueur, Boolean doublesens,ArrayList<VectorObject> points){
         this.text=text;
         this.line = line;
         this.nom = nom;
@@ -96,6 +98,7 @@ class VectorArc extends Arc
         this.arrivee = arrivee;
         this.capacite = capacite;
         this.doublesens=doublesens;
+        this.points=points;
     }
 
 }
@@ -264,8 +267,9 @@ public class MenuController {
         line.setStrokeWidth(6);
         this.root.getChildren().add(line);//Attention : il faut garder ces infos dans le vecteur pour les modifier à l'affichage
         this.root.getChildren().add(text);
+        ArrayList<VectorObject> a=new ArrayList<VectorObject>();
         //Création de l'espace de stockage des Arcs
-        VectorArc element = new VectorArc(line, text, nom, capacite, departNode, arriveNode, longueur, doublesens);
+        VectorArc element = new VectorArc(line, text, nom, capacite, departNode, arriveNode, longueur, doublesens,a);
         TableArc.add(element);
         System.out.println("Vecteur des Arcs :");
         for (VectorArc vectorArc : TableArc) {
@@ -305,6 +309,7 @@ public class MenuController {
         //Création de l'espace de stockage des Objets
         VectorObject element = new VectorObject(cercle, x, y, nom, donnees, departNode, arriveNode, vitesse, text, vectorArc, t0);
         TableObject.add(element);
+        vectorArc.points.add(element);
         System.out.println("Vecteur des Objets :");
         for (VectorObject vectorObject : TableObject) {
             System.out.print("Objet " + vectorObject.nom + " : \n ");
@@ -327,6 +332,7 @@ public class MenuController {
      * @param nom Nom du noeud
      */
     private void createNode(Double x, Double y, Double capacite, String nom) {//Permet d'afficher un Noeud
+
             Circle cercle = new Circle();
             Text text = new Text();
             affnoeud(cercle, text, x, y, capacite, nom);
@@ -373,11 +379,19 @@ public class MenuController {
      */
     private void createobjet(Double x, Double y, String nom, String donnees, Double vitesse,
                              VectorN departN,VectorN arriveN, VectorNode departNode, VectorNode arriveNode,VectorA vectorA,VectorArc vectorArc) {//A modifier avec le corps de l'algo
-        Circle cercle = new Circle();
-        Text text = new Text();
-        VectorO elem = new VectorO(x, y, nom, donnees, departN.nom, arriveN.nom, vitesse, vectorA.nom, this.temps);
-        TableO.add(elem);
-        affobjet(cercle, text, x, y, nom, donnees, departNode, arriveNode, vitesse, vectorArc,this.temps);}
+        System.out.println(vectorArc.points.size());
+        if (vectorArc.capacite > vectorArc.points.size()) {
+            Circle cercle = new Circle();
+            Text text = new Text();
+            VectorO elem = new VectorO(x, y, nom, donnees, departN.nom, arriveN.nom, vitesse, vectorA.nom, this.temps);
+            TableO.add(elem);
+            affobjet(cercle, text, x, y, nom, donnees, departNode, arriveNode, vitesse, vectorArc, this.temps);
+        }
+        else {
+            message("L'Arc "+ vectorArc.nom + " est déjà complet.","Vous ne pouvez créer l'objet.","Opération Impossible");
+        }
+
+    }
 
 
     /**
@@ -402,6 +416,7 @@ public class MenuController {
             if (l>=1){
                 this.root.getChildren().remove(objet.cercle);
                 this.root.getChildren().remove(objet.text);
+                objet.arc.points.remove(objet);
                 TableObject.remove(objet);
                 TableO.remove(o);
                 i--;
@@ -650,6 +665,7 @@ public class MenuController {
 
                     }
                     else {
+                        Object.arc.points.remove(Object);
                         this.root.getChildren().remove(Object.cercle);
                         this.root.getChildren().remove(Object.text);
                         TableObject.remove(Object);

@@ -144,7 +144,11 @@ public class ObjetController {
                     ++j;
                 }
                 MenuController C= new MenuController();
-                if (ObjectExist) {
+                if (this.VectorArc.capacite<=this.VectorArc.points.size())
+                {
+                    C.message("L'Arc "+ this.VectorArc.nom + " est déjà complet.","Vous ne pouvez créer l'objet.","Opération Impossible");
+                }
+                else if (ObjectExist) {
                     C.message("L'objet "+ nom + " existe déjà.","Merci de choisir un autre nom.","Nom Invalide");
                 }
                 else if (!NodeDEPExist) {
