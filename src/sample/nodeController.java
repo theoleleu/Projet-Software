@@ -39,19 +39,18 @@ public class nodeController {
         return this.nom;
     }
     public void validateFen() {//ActionEvent actionEvent
-            String name = nodeName.getText();
-                this.nom=name;
+                this.nom= nodeName.getText();
                 boolean NodeExist = false;
                 int j = 0;
                 while ((!NodeExist ) && j < this.TableNode.size()) {
-                    if (this.TableNode.get(j).nom.equals(nom)) {
+                    if (this.TableNode.get(j).nom.equals(this.nom)) {
                         NodeExist = true;
                     }
                     ++j;
                 }
                 if (NodeExist){
                     MenuController C= new MenuController();
-                    C.message("Le Noeud " + nom + " existe déjà.","Merci de choisir un autre Nom.","Nom Incorrect");
+                    C.message("Le Noeud " + this.nom + " existe déjà.","Merci de choisir un autre Nom.","Nom Incorrect");
                 }
                 else {
                 Stage stage = (Stage) validateButton.getScene().getWindow();
