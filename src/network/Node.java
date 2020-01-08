@@ -3,7 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 public class Node {
 	private int id;
-	private String descripteur;
+    public String nom;
+    public Double capacite;
+    public Double x;
+    public Double y;
+    public String descripteur;
     List<Arc> arc = new ArrayList<>();
     private int nbArc;
     List<Point> object = new ArrayList<>();
@@ -12,6 +16,10 @@ public class Node {
 
     public Node(int Noeudid) {
         this.id = Noeudid;
+    }
+
+    public Node() {
+
     }
 
     public void addNodeChild(Node n1) {

@@ -11,6 +11,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import network.Arc;
+import network.Node;
+import network.Point;
+
 import java.io.Serializable;
 import java.io.*;
 import java.util.*;
@@ -18,12 +22,10 @@ import java.util.*;
 /**
  * Classe permettant de stocker un objet
  */
-class VectorObject
+class VectorObject extends Point
     {
         Double t0;
         Circle cercle;
-        String nom;
-        String donnee;
         VectorNode depart;
         VectorNode arrivee;
         Double vitesse;
@@ -47,6 +49,7 @@ class VectorObject
          * @param t0 Temps de création de l'objet
          */
         VectorObject(Circle cercle, Double x, Double y, String nom, String donnee, VectorNode depart, VectorNode arrivee, Double vitesse, Text text, VectorArc arc, Double t0) {
+            super();
             this.t0=t0;
             this.cercle = cercle;
             this.nom = nom;
@@ -65,14 +68,11 @@ class VectorObject
 /**
  * Classe permettant de stocker un arc
  */
-class VectorArc
+class VectorArc extends Arc
 {
-    Boolean doublesens;
-    Double longueur;
     Line line;
     Text text;
     String nom;
-    Integer capacite;
     VectorNode depart;
     VectorNode arrivee;
 
@@ -103,13 +103,10 @@ class VectorArc
 /**
  * Classe permettant de stocker un Noeud
  */
-class VectorNode
+class VectorNode extends Node
 {   Circle cercle;
     Text text;
-    String nom;
-    Double capacite;
-    Double x;
-    Double y;
+
 
     /**
      * Fonction permettant de créer un noeud
@@ -122,6 +119,7 @@ class VectorNode
      */
     VectorNode(Circle cercle, Text text, String nom, Double capacite, Double x, Double y)
     {
+        super();
         this.cercle = cercle;
         this.nom = nom;
         this.text = text;

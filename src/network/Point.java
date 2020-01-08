@@ -4,19 +4,18 @@ import java.lang.String;
 import java.util.NoSuchElementException;
 
 public class Point {
-    private String id;
-    private String name;
-    private String donnees;
-    private String[] parcours;
-    private float priority; 
+    public String id;
+    public String nom;
+    public String donnee;
+    public String[] parcours;
+    public float priority;
+    public int position;
+    public boolean onNode;
 
-    private int position;
-    private boolean onNode;
-
-    public Point(String id, String name, String donnees, String[] parcours, float priority, int position, boolean onNode) {
+    public Point(String id, String nom, String donnees, String[] parcours, float priority, int position, boolean onNode) {
         this.id = id;
-        this.name = name;
-        this.donnees = donnees;
+        this.nom = nom;
+        this.donnee = donnees;
         this.parcours = parcours;
         this.priority = priority;
         
@@ -32,8 +31,12 @@ public class Point {
         }
     }
 
+    public Point() {
+
+    }
+
     public String toString() {
-        String res = "[id: " + this.id + ", name: " + this.name + "]\ndonnees: " + this.donnees;
+        String res = "[id: " + this.id + ", name: " + this.nom + "]\ndonnees: " + this.donnee;
         return res;
     }
 
@@ -42,11 +45,11 @@ public class Point {
     }
 
     public String getName() {
-        return this.name;
+        return this.nom;
     }
 
     public String getDonnees() {
-        return this.donnees;
+        return this.donnee;
     }
 
     public float getPriority() {

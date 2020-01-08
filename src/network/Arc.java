@@ -2,35 +2,35 @@ package network;
 
 public class Arc {
     public String id;
-    private String name;
-    private Node start;
-    private Node end;
-    private int direction;
-    private float length;
-    private int capacity;
-    private boolean permission;
-    private float speedLimit;
-    private boolean speedIsLimited;
+    public String name;
+    public Node start;
+    public Node end;
+    public int direction;
+    public Double longueur;
+    public int capacite;
+    public boolean doublesens;
+    public float speedLimit;
+    public boolean speedIsLimited;
 
-    private int countPoint;
+    public int countPoint;
 
-    private static int arcCounter;
+    public static int arcCounter;
 
     public Arc(){
         this.id="1"+Integer.toString(arcCounter++);
         this.name="arc";
     }
 
-    public Arc(String id, String name, Node start, Node end, int direction, float length, int capacity,
+    public Arc(String id, String name, Node start, Node end, int direction, Double length, int capacity,
                boolean permission, float speedLimit, boolean speedIsLimited, int countPoint) {
         this.id = id;
         this.name = name;
         this.start = start;
         this.end = end;
         this.direction = direction;
-        this.length = length;
-        this.capacity = capacity;
-        this.permission = permission;
+        this.longueur = length;
+        this.capacite = capacity;
+        this.doublesens = permission;
         this.speedLimit = speedLimit;
         this.speedIsLimited = speedIsLimited;
         this.countPoint = countPoint;
@@ -76,28 +76,28 @@ public class Arc {
         this.direction = direction;
     }
 
-    public float getLength() {
-        return length;
+    public Double getLength() {
+        return longueur;
     }
 
-    public void setLength(float length) {
-        this.length = length;
+    public void setLength(Double length) {
+        this.longueur = length;
     }
 
     public int getCapacity() {
-        return capacity;
+        return capacite;
     }
 
     public void setCapacity(int capacity) {
-        this.capacity = capacity;
+        this.capacite = capacity;
     }
 
     public boolean isPermission() {
-        return permission;
+        return doublesens;
     }
 
     public void setPermission(boolean permission) {
-        this.permission = permission;
+        this.doublesens = permission;
     }
 
     public float getSpeedLimit() {
