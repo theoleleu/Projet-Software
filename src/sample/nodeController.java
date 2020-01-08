@@ -1,8 +1,6 @@
 package sample;
 
 import javafx.stage.Stage;
-
-import java.awt.*;
 import java.util.ArrayList;
 
 public class nodeController {
